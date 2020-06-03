@@ -1,22 +1,11 @@
 import React from 'react';
+import Calendar from "./CalendarComponent";
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Vao programar seus bando de
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Calendar/>
     </div>
   );
 }
