@@ -1,14 +1,16 @@
 const express = require('express');
 const app = express();
-const cors = require('cors');
+var cors = require('cors');
 app.use(cors());
+var bodyParser = require('body-parser')
+app.use(bodyParser.json())
 
 app.get('/', function (req, res) {
     res.send('<h1>Hello World!</h1>')
 })
 
 app.post('/', function (req, res) {
-    console.log(req.body.nome)
+    res.send(req.body.nome)
 });
 
 const port = 5000;
