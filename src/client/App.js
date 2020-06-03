@@ -1,24 +1,26 @@
-import React from 'react';
-import './App.css';
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Vao programar seus bando de
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import CalendarComponent from "./component/CalendarComponent";
+import Home from "./component/Home";
+import Error from "./component/Error";
+import Navigation from "./component/Navigation";
+
+class App extends Component {
+    render() {
+        return (
+            <BrowserRouter>
+                <div>
+                    <Navigation />
+                    <Switch>
+                        <Route path="/" component={Home} exact />
+                        <Route path="/calendar" component={CalendarComponent} />
+                        <Route component={Error} />
+                    </Switch>
+                </div>
+            </BrowserRouter>
+        );
+    }
+};
 
 export default App;

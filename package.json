@@ -9,8 +9,10 @@
     "concurrently": "^5.2.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "moment": "^2.26.0",
     "nodemon": "^2.0.4",
     "react": "^16.13.1",
+    "react-big-calendar": "^0.25.0",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1"
