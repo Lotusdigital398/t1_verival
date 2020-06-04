@@ -22,10 +22,12 @@ class CalendarComponent extends Component {
         ]
     };
 
+
     render() {
         return (
             <div className="Calendar">
                 <Calendar
+                    views={['month', 'agenda']}
                     localizer={localizer}
                     defaultDate={new Date()}
                     defaultView="month"
