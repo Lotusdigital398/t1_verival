@@ -1,5 +1,6 @@
 import React from "react";
 
+// Pagina principal da aplicacao
 const Home = () => {
     return (
         <div>

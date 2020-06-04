@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Pagina de erro quando um usuario tenta acessar algo que nao existe
 const Error = () => {
     return (
         <div>
