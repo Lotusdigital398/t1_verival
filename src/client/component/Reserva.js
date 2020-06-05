@@ -2,6 +2,7 @@ import 'date-fns';
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import './Reserva.css'
 
 
 import InputLabel from '@material-ui/core/InputLabel';
@@ -56,7 +57,7 @@ export default function Reserva() {
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <Grid container justify="space-around">
-                <KeyboardDatePicker
+                <KeyboardDatePicker className="drop"
                     disableToolbar
                     variant="inline"
                     format="dd/MM/yyyy"
@@ -69,7 +70,7 @@ export default function Reserva() {
                         'aria-label': 'change date',
                     }}
                 />
-                <KeyboardDatePicker
+                <KeyboardDatePicker className="drop"
                     margin="normal"
                     id="date-picker-dialog"
                     label="Date picker dialog"
@@ -81,12 +82,14 @@ export default function Reserva() {
                     }}
                 />
 
-                <form>
+                <form className="matricula">
                     <TextField id="outlined-basic" label="Matrícula" variant="outlined"/>
                 </form>
+
+
                 <div>
 
-                    <FormControl variant="outlined">
+                    <FormControl className="recursos" variant="outlined">
                         <InputLabel id="demo-simple-select-outlined-label">Recurso</InputLabel>
                         <Select
                             labelId="demo-simple-select-outlined-label"
@@ -104,8 +107,10 @@ export default function Reserva() {
                         </Select>
                     </FormControl>
                 </div>
+
+
                 <div>
-                    <FormControl variant="outlined">
+                    <FormControl className="tipo" variant="outlined">
                         <InputLabel id="demo-simple-select-outlined-label">Tipo</InputLabel>
                         <Select
                             labelId="demo-simple-select-outlined-label"
@@ -124,24 +129,12 @@ export default function Reserva() {
                     </FormControl>
                 </div>
 
-                <div>
-                    <div>
-                        <FormControl variant="outlined">
-                            <InputLabel htmlFor="outlined-adornment-amount">Preço</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-amount"
-                                value={valor}
-                                onChange={handleChangeValor}
-                                startAdornment={<InputAdornment position="start">R$</InputAdornment>}
-                                labelWidth={60}
-                            />
-                        </FormControl>
-                    </div>
-                </div>
 
-                <form>
+
+                <form className="quantidade">
                     <TextField id="outlined-basic" label="Quantidade" variant="outlined"/>
                 </form>
+
 
 
             </Grid>

@@ -1,0 +1,35 @@
+.drop{
+    position: relative;
+    left: 700px;
+    top: 100px;
+}
+
+.matricula{
+    position: relative;
+    top: 280px;
+    right: 300px;
+}
+
+.recursos{
+    position: relative;
+    top: 280px;
+    right: 300px;
+    width: 200px;
+}
+
+.tipo{
+    position: relative;
+    top: 280px;
+    right: 300px;
+    width: 200px;
+
+}
+
+.quantidade{
+    position: relative;
+    top: 280px;
+    right: 300px;
+
+}
+
+
