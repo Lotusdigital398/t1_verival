@@ -23,8 +23,8 @@ class Reserva extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataI: "",
-            dataF: "",
+            dataI: new Date(),
+            dataF: new Date(),
             recurso: "",
             matricula: "",
             tipo: "",
@@ -85,7 +85,6 @@ class Reserva extends Component {
                                         margin="normal"
                                         id="dataIId"
                                         label="Date picker inline"
-                                        defaultValue= {new Date()}
                                         value={this.state.dataI}
                                         onChange={this.handleDataI}
                                         KeyboardButtonProps={{
