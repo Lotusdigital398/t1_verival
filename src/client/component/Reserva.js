@@ -75,7 +75,6 @@ class Reserva extends Component {
 
     render() {
 
-
         return (
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Grid container justify="space-around">
@@ -84,13 +83,26 @@ class Reserva extends Component {
                                         variant="inline"
                                         format="dd/MM/yyyy"
                                         margin="normal"
-                                        id="date-picker-inline"
+                                        id="dataIId"
                                         label="Date picker inline"
+                                        defaultValue= {new Date()}
                                         value={this.state.dataI}
                                         onChange={this.handleDataI}
                                         KeyboardButtonProps={{
                                             'aria-label': 'change date',
                                         }}
+                    />
+
+                    <TextField
+                        id="date"
+                        label="Birthday"
+                        type="date"
+                        defaultValue="2017-05-24"
+                        //value={this.state.dataI}
+                        //onChange={this.handleDataI}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
 
 
@@ -100,7 +112,7 @@ class Reserva extends Component {
                         variant="inline"
                         format="dd/MM/yyyy"
                         margin="normal"
-                        id="date-picker-inline"
+                        id="dataFId"
                         label="Date picker inline"
                         value={this.state.dataF}
                         onChange={this.handleDataF}
@@ -111,7 +123,7 @@ class Reserva extends Component {
 
                     <form className="matricula">
                         <TextField
-                            id="outlined-basic"
+                            id="matricula-Id"
                             label="Matrícula"
                             variant="outlined"
                             value={this.state.matricula}
@@ -170,7 +182,7 @@ class Reserva extends Component {
 
                     <form className="quantidade">
                         <TextField
-                            id="outlined-basic"
+                            id="quantidade-Id"
                             label="Quantidade"
                             variant="outlined"
                             value={this.state.quantidade}

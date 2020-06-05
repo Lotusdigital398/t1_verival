@@ -5,9 +5,7 @@ import './Navigation.css'
 
 // Botoes "globais" da aplicacao, podendo ser vistos em todas as paginas
 const Navigation = () => {
-    const navStyle = {
-        color: 'white'
-    };
+
     return (
         <nav>
 
