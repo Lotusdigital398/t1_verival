@@ -1,11 +1,16 @@
+// Imports do React Router, etc
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+// Imports de Components
+// Vale notar que para o React Router, cada componente se trata de uma pagina
 import CalendarComponent from "./component/CalendarComponent";
 import Home from "./component/Home";
 import Error from "./component/Error";
 import Navigation from "./component/Navigation";
 
+
+// Instanciacao das paginas disponiveis a serem acessadas na aplicacao
 class App extends Component {
     render() {
         return (

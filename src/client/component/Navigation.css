@@ -1,0 +1,31 @@
+.Navigation{
+    text-align: center;
+}
+
+
+
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 10vh;
+    background: rgb(73, 79, 82);
+    color: white;
+    list-style: none;
+    text-decoration: none;
+}
+
+.nav-links{
+    width: 40%;
+    display: flex;
+    justify-cointent: space-around;
+    align-items: center;
+    list-style: none;
+}
+
+.navList {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+
+}

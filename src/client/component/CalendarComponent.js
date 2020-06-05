@@ -5,8 +5,10 @@ import moment from "moment";
 import "../App.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
+// Instanciacao do localizer, library que gerencia o tempo
 const localizer = momentLocalizer(moment);
 
+// Instanciacao padrao de um calendario da library BigCalendar
 class CalendarComponent extends Component {
     state = {
         events: [
@@ -20,10 +22,12 @@ class CalendarComponent extends Component {
         ]
     };
 
+
     render() {
         return (
             <div className="Calendar">
                 <Calendar
+                    views={['month', 'agenda']}
                     localizer={localizer}
                     defaultDate={new Date()}
                     defaultView="month"
