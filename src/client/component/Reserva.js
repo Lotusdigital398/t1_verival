@@ -53,6 +53,7 @@ class Reserva extends Component {
     handleRec(event) {
         console.log(event.target)
         this.setState({recurso: event.target.value})
+        this.setState({tipo : ""})
     }
 
     handleTipo(event) {
@@ -74,7 +75,7 @@ class Reserva extends Component {
 
 
     render() {
-
+        const today = new Date();
         return (
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Grid container justify="space-around">
@@ -85,25 +86,13 @@ class Reserva extends Component {
                                         margin="normal"
                                         id="dataIId"
                                         label="Date picker inline"
+                                        minDate={today}
                                         value={this.state.dataI}
                                         onChange={this.handleDataI}
                                         KeyboardButtonProps={{
                                             'aria-label': 'change date',
                                         }}
                     />
-
-                    <TextField
-                        id="date"
-                        label="Birthday"
-                        type="date"
-                        defaultValue="2017-05-24"
-                        //value={this.state.dataI}
-                        //onChange={this.handleDataI}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
-
 
                     <KeyboardDatePicker
                         className="drop"
@@ -113,6 +102,7 @@ class Reserva extends Component {
                         margin="normal"
                         id="dataFId"
                         label="Date picker inline"
+                        minDate={this.state.dataI}
                         value={this.state.dataF}
                         onChange={this.handleDataF}
                         KeyboardButtonProps={{
@@ -147,6 +137,7 @@ class Reserva extends Component {
                                 onChange={this.handleRec}
                             >
                                 <MenuItem value="">
+                                    <em>None</em>
                                 </MenuItem>
                                 <MenuItem value={"Sala"}>Sala</MenuItem>
                                 <MenuItem value={"Televisao"}>Televisao</MenuItem>
@@ -160,7 +151,12 @@ class Reserva extends Component {
 
                     <div>
                         <FormControl className="tipo" variant="outlined">
-                            <InputLabel id="demo-simple-select-outlined-label">Tipo</InputLabel>
+                            {this.state.recurso === "Sala" ?
+                                <InputLabel id="demo-simple-select-outlined-label">Número</InputLabel>
+                            :
+                                <InputLabel id="demo-simple-select-outlined-label">Tipo</InputLabel>
+                            }
+
                             <Select
                                 labelId="demo-simple-select-outlined-label"
                                 id="demo-simple-select-outlined"
@@ -178,16 +174,20 @@ class Reserva extends Component {
                         </FormControl>
                     </div>
 
+                    {this.state.recurso !== "Sala" ?
+                        <form className="quantidade">
+                            <TextField
+                                id="quantidade-Id"
+                                label="Quantidade"
+                                variant="outlined"
+                                value={this.state.quantidade}
+                                onChange={this.handleQuant}
+                            />
+                        </form>
 
-                    <form className="quantidade">
-                        <TextField
-                            id="quantidade-Id"
-                            label="Quantidade"
-                            variant="outlined"
-                            value={this.state.quantidade}
-                            onChange={this.handleQuant}
-                        />
-                    </form>
+                        :
+                        <form></form>
+                    }
 
 
                 </Grid>
