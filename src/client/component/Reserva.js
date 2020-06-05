@@ -40,36 +40,30 @@ class Reserva extends Component {
 
 
     handleDataI(event) {
-        console.log(event)
         this.setState({dataI: event})
     }
 
     handleDataF(event) {
-        console.log(event)
         this.setState({dataF: event})
     }
 
 
     handleRec(event) {
-        console.log(event.target)
         this.setState({recurso: event.target.value})
-        this.setState({tipo : ""})
+        this.setState({tipo: ""})
     }
 
     handleTipo(event) {
-        console.log(event)
         this.setState({tipo: event.target.value})
     }
 
 
     handleMat(event) {
-        console.log(event)
         this.setState({matricula: event.target.value})
     }
 
 
     handleQuant(event) {
-        console.log(event)
         this.setState({quantidade: event.target.value})
     }
 
@@ -79,19 +73,20 @@ class Reserva extends Component {
         return (
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Grid container justify="space-around">
-                    <KeyboardDatePicker className="drop"
-                                        disableToolbar
-                                        variant="inline"
-                                        format="dd/MM/yyyy"
-                                        margin="normal"
-                                        id="dataIId"
-                                        label="Date picker inline"
-                                        minDate={today}
-                                        value={this.state.dataI}
-                                        onChange={this.handleDataI}
-                                        KeyboardButtonProps={{
-                                            'aria-label': 'change date',
-                                        }}
+                    <KeyboardDatePicker
+                        className="drop"
+                        disableToolbar
+                        variant="inline"
+                        format="dd/MM/yyyy"
+                        margin="normal"
+                        id="dataIId"
+                        label="Date picker inline"
+                        minDate={today}
+                        value={this.state.dataI}
+                        onChange={this.handleDataI}
+                        KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                        }}
                     />
 
                     <KeyboardDatePicker
@@ -153,7 +148,7 @@ class Reserva extends Component {
                         <FormControl className="tipo" variant="outlined">
                             {this.state.recurso === "Sala" ?
                                 <InputLabel id="demo-simple-select-outlined-label">Número</InputLabel>
-                            :
+                                :
                                 <InputLabel id="demo-simple-select-outlined-label">Tipo</InputLabel>
                             }
 
