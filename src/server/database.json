@@ -1,0 +1,105 @@
+{
+  "colaboradores": [
+    {
+      "nome": "Max Franke",
+      "matricula": "17104173",
+      "email": "max.franke@acad.pucrs.br"
+    },
+    {
+      "nome": "Lucas Schell",
+      "matricula": "17104156",
+      "email": "lucas.schell@acad.pucrs.br"
+    },
+    {
+      "nome": "Carlos de Santi",
+      "matricula": "17104135",
+      "email": "carlos.castro@acad.pucrs.br"
+    },
+    {
+      "nome": "Gabriel Castro",
+      "matricula": "17104130",
+      "email": "gabriel.castro@acad.pucrs.br"
+    },
+    {
+      "nome": "Frederico Thofehrn",
+      "matricula": "09104169",
+      "email": "frederico.thofehrn@acad.pucrs.br"
+    }
+  ],
+  "sala": [
+    {
+      "numero": "101",
+      "reservas": []
+    },
+    {
+      "numero": "102",
+      "reservas": []
+    },
+    {
+      "numero": "103",
+      "reservas": []
+    },
+    {
+      "numero": "104",
+      "reservas": []
+    },
+    {
+      "numero": "105",
+      "reservas": []
+    }
+  ],
+  "mobilia": [
+    {
+      "tipo": "cadeira",
+      "totais": "200",
+      "indisponivel": "10",
+      "preco": "5",
+      "reservas": [
+        {
+          "matricula":"17104173",
+          "dataInicio":"10/06/2020",
+          "dataFim":"12/06/2020",
+          "quantidade":"10",
+          "preco":"150"
+        }
+      ]
+    },
+    {
+      "tipo": "mesa",
+      "totais": "200",
+      "indisponivel": "0",
+      "preco": "10",
+      "reservas": []
+    }
+  ],
+  "equipamento": [
+    {
+      "tipo": "notebook",
+      "totais": "70",
+      "indisponivel": "0",
+      "preco": "10",
+      "reservas": []
+    },
+    {
+      "tipo": "mouse",
+      "totais": "70",
+      "indisponivel": "0",
+      "preco": "2",
+      "reservas": []
+    },
+    {
+      "tipo": "tablet",
+      "totais": "20",
+      "indisponivel": "0",
+      "preco": "10",
+      "reservas": []
+    },
+    {
+      "tipo": "smartphone",
+      "totais": "20",
+      "indisponivel": "0",
+      "preco": "10",
+      "reservas": []
+    }
+  ]
+}
