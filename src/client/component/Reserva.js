@@ -35,7 +35,9 @@ class Reserva extends Component {
             recurso: "",
             matricula: "",
             tipo: "",
-            quantidade: ""
+            quantidade: "",
+            recursos: [],
+            tipos: []
         }
         this.handleDataI = this.handleDataI.bind(this)
         this.handleDataF = this.handleDataF.bind(this)
@@ -43,6 +45,34 @@ class Reserva extends Component {
         this.handleTipo = this.handleTipo.bind(this)
         this.handleMat = this.handleMat.bind(this)
         this.handleQuant = this.handleQuant.bind(this)
+    }
+
+
+    componentDidMount() {
+        this.getRecursos();
+        this.getTipos();
+    }
+
+    getRecursos() {
+        fetch('http://localhost:5000/getRecursos', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.text()).then(res => {
+            this.setState({recursos: JSON.parse(res)})
+        })
+    }
+
+    getTipos() {
+        fetch('http://localhost:5000/getTipos', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.text()).then(res => {
+            this.setState({tipos: JSON.parse(res)})
+        })
     }
 
 
@@ -58,6 +88,7 @@ class Reserva extends Component {
     handleRec(event) {
         this.setState({recurso: event.target.value})
         this.setState({tipo: ""})
+        this.setState({quantidade: ""})
     }
 
     handleTipo(event) {
@@ -147,12 +178,12 @@ class Reserva extends Component {
                                     value={this.state.recurso}
                                     onChange={this.handleRec}
                                 >
-                                    <MenuItem value="">
-                                        <em>None</em>
-                                    </MenuItem>
-                                    <MenuItem value={"Sala"}>Sala</MenuItem>
-                                    <MenuItem value={"Televisao"}>Televisao</MenuItem>
-                                    <MenuItem value={"Cadeira"}>Cadeira</MenuItem>
+                                    {this.state.recursos.map((item) => {
+                                        return (
+                                            <MenuItem value={item}>{item}</MenuItem>
+                                        )
+                                    })}
+
                                 </Select>
 
 
@@ -175,12 +206,11 @@ class Reserva extends Component {
                                     value={this.state.tipo}
                                     onChange={this.handleTipo}
                                 >
-                                    <MenuItem value="">
-                                        <em>None</em>
-                                    </MenuItem>
-                                    <MenuItem value={10}>Ten</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
+                                    {this.state.tipos.map((item) => {
+                                        return (
+                                            <MenuItem value={item}>{item}</MenuItem>
+                                        )
+                                    })}
                                 </Select>
                             </FormControl>
                         </div>
