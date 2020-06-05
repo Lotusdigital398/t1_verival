@@ -28,7 +28,7 @@
   ],
   "sala": [
     {
-      "numero": "101",
+      "tipo": "101",
       "reservas": [{
         "matricula":"17104173",
         "dataInicio":"10-06-2020",
@@ -37,19 +37,19 @@
       }]
     },
     {
-      "numero": "102",
+      "tipo": "102",
       "reservas": []
     },
     {
-      "numero": "103",
+      "tipo": "103",
       "reservas": []
     },
     {
-      "numero": "104",
+      "tipo": "104",
       "reservas": []
     },
     {
-      "numero": "105",
+      "tipo": "105",
       "reservas": []
     }
   ],

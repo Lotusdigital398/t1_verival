@@ -8,24 +8,23 @@ const fs = require('fs');
 const database = require('./database.json')
 const moment = require('moment')
 
-app.get('/getColaboradores', function (req, res) {
-    const colaboradores = database.colaboradores
-    res.send(colaboradores)
+
+app.get('/getRecursos', function (req, res) {
+    res.send(["sala", "mobilia", "equipamento"])
 })
 
-app.get('/getSalas', function (req, res) {
-    const salas = database.sala
-    res.send(salas)
-})
-
-app.get('/getMobilias', function (req, res) {
-    const mobilia = database.mobilia
-    res.send(mobilia)
-})
-
-app.get('/getEquipamentos', function (req, res) {
-    const equipamento = database.equipamento
-    res.send(equipamento)
+app.get('/getTipos', function (req, res) {
+    var list = []
+    if (database[req.query.recurso]) {
+        database[req.query.recurso].forEach((item) => {
+            list.push(item.tipo)
+        })
+        console.log(list)
+        res.send(list)
+    } else {
+        console.log(false)
+        res.send(false)
+    }
 })
 
 app.post('/isDisponivel', function (req, res) {
@@ -70,7 +69,7 @@ app.post('/isDisponivel', function (req, res) {
                                 somaItens += parseInt(reservas.quantidade)
                             }
                         })
-                        if(somaItens + parseInt(req.body.quantidade) > item.totais){
+                        if (somaItens + parseInt(req.body.quantidade) > item.totais) {
                             disponivel = false
                         }
                     })

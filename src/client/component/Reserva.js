@@ -34,10 +34,11 @@ class Reserva extends Component {
             dataF: new Date(),
             recurso: "",
             matricula: "",
-            tipo: "",
+            tipo: '',
             quantidade: "",
             recursos: [],
-            tipos: []
+            tipos: [],
+            regexp : /^[0-9\b]+$/
         }
         this.handleDataI = this.handleDataI.bind(this)
         this.handleDataF = this.handleDataF.bind(this)
@@ -64,17 +65,20 @@ class Reserva extends Component {
         })
     }
 
-    getTipos() {
-        fetch('http://localhost:5000/getTipos', {
+    getTipos(recurso) {
+        fetch(`http://localhost:5000/getTipos?recurso=${recurso ? recurso : this.state.recurso}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(res => res.text()).then(res => {
-            this.setState({tipos: JSON.parse(res)})
+            if (res === 'false') {
+                this.setState({tipos: []})
+            } else {
+                this.setState({tipos: JSON.parse(res)})
+            }
         })
     }
-
 
     handleDataI(event) {
         this.setState({dataI: event})
@@ -89,6 +93,7 @@ class Reserva extends Component {
         this.setState({recurso: event.target.value})
         this.setState({tipo: ""})
         this.setState({quantidade: ""})
+        this.getTipos(event.target.value)
     }
 
     handleTipo(event) {
@@ -102,7 +107,9 @@ class Reserva extends Component {
 
 
     handleQuant(event) {
-        this.setState({quantidade: event.target.value})
+        if (event.target.value === '' || this.state.regexp.test(event.target.value)) {
+            this.setState({quantidade: event.target.value})
+        }
     }
 
 
@@ -131,9 +138,6 @@ class Reserva extends Component {
                             minDate={today}
                             value={this.state.dataI}
                             onChange={this.handleDataI}
-                            keyboardButtonProps={{
-                                'aria-label': 'change date',
-                            }}
                         />
 
                         <KeyboardDatePicker
@@ -147,9 +151,6 @@ class Reserva extends Component {
                             minDate={this.state.dataI}
                             value={this.state.dataF}
                             onChange={this.handleDataF}
-                            KeyboardButtonProps={{
-                                'aria-label': 'change date',
-                            }}
                         />
 
                         <form className="matricula">
@@ -180,7 +181,7 @@ class Reserva extends Component {
                                 >
                                     {this.state.recursos.map((item) => {
                                         return (
-                                            <MenuItem value={item}>{item}</MenuItem>
+                                            <MenuItem key={item} value={item}>{item}</MenuItem>
                                         )
                                     })}
 
@@ -208,7 +209,7 @@ class Reserva extends Component {
                                 >
                                     {this.state.tipos.map((item) => {
                                         return (
-                                            <MenuItem value={item}>{item}</MenuItem>
+                                            <MenuItem key={item} value={item}>{item}</MenuItem>
                                         )
                                     })}
                                 </Select>
