@@ -29,7 +29,12 @@
   "sala": [
     {
       "numero": "101",
-      "reservas": []
+      "reservas": [{
+        "matricula":"17104173",
+        "dataInicio":"10-06-2020",
+        "dataFim":"12-06-2020",
+        "preco":"150"
+      }]
     },
     {
       "numero": "102",
@@ -57,9 +62,9 @@
       "reservas": [
         {
           "matricula":"17104173",
-          "dataInicio":"10/06/2020",
-          "dataFim":"12/06/2020",
-          "quantidade":"10",
+          "dataInicio":"10-06-2020",
+          "dataFim":"12-06-2020",
+          "quantidade":"180",
           "preco":"150"
         }
       ]
