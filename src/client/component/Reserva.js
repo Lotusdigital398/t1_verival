@@ -11,12 +11,19 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 
+import Button from '@material-ui/core/Button';
+import SaveIcon from '@material-ui/icons/Save';
+
+import {createMuiTheme} from "@material-ui/core";
+import {ThemeProvider} from "@material-ui/styles";
+
 import DateFnsUtils from '@date-io/date-fns';
 import {
     MuiPickersUtilsProvider,
     KeyboardDatePicker,
 
 } from '@material-ui/pickers';
+
 
 class Reserva extends Component {
 
@@ -69,124 +76,143 @@ class Reserva extends Component {
 
 
     render() {
+
+        const theme = createMuiTheme({
+            palette: {
+                type: "dark"
+            }
+        });
+
         const today = new Date();
         return (
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid container justify="space-around">
-                    <KeyboardDatePicker
-                        className="drop"
-                        disableToolbar
-                        variant="inline"
-                        format="dd/MM/yyyy"
-                        margin="normal"
-                        id="dataIId"
-                        label="Date picker inline"
-                        minDate={today}
-                        value={this.state.dataI}
-                        onChange={this.handleDataI}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
-                    />
+            <ThemeProvider theme={theme}>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <Grid>
 
-                    <KeyboardDatePicker
-                        className="drop"
-                        disableToolbar
-                        variant="inline"
-                        format="dd/MM/yyyy"
-                        margin="normal"
-                        id="dataFId"
-                        label="Date picker inline"
-                        minDate={this.state.dataI}
-                        value={this.state.dataF}
-                        onChange={this.handleDataF}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
-                    />
-
-                    <form className="matricula">
-                        <TextField
-                            id="matricula-Id"
-                            label="Matrícula"
-                            variant="outlined"
-                            value={this.state.matricula}
-                            onChange={this.handleMat}
-
-
+                        <KeyboardDatePicker
+                            className="drop1"
+                            disableToolbar
+                            variant="inline"
+                            format="dd/MM/yyyy"
+                            margin="normal"
+                            id="dataIId"
+                            label="Date picker inline"
+                            minDate={today}
+                            value={this.state.dataI}
+                            onChange={this.handleDataI}
+                            keyboardButtonProps={{
+                                'aria-label': 'change date',
+                            }}
                         />
 
+                        <KeyboardDatePicker
+                            className="drop2"
+                            disableToolbar
+                            variant="inline"
+                            format="dd/MM/yyyy"
+                            margin="normal"
+                            id="dataFId"
+                            label="Date picker inline"
+                            minDate={this.state.dataI}
+                            value={this.state.dataF}
+                            onChange={this.handleDataF}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                            }}
+                        />
 
-                    </form>
-
-
-                    <div>
-
-                        <FormControl className="recursos" variant="outlined">
-                            <InputLabel id="demo-simple-select-outlined-label">Recurso</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-outlined-label"
-                                id="demo-simple-select-outlined"
-                                label="Recurso"
-                                value={this.state.recurso}
-                                onChange={this.handleRec}
-                            >
-                                <MenuItem value="">
-                                    <em>None</em>
-                                </MenuItem>
-                                <MenuItem value={"Sala"}>Sala</MenuItem>
-                                <MenuItem value={"Televisao"}>Televisao</MenuItem>
-                                <MenuItem value={"Cadeira"}>Cadeira</MenuItem>
-                            </Select>
-
-
-                        </FormControl>
-                    </div>
-
-
-                    <div>
-                        <FormControl className="tipo" variant="outlined">
-                            {this.state.recurso === "Sala" ?
-                                <InputLabel id="demo-simple-select-outlined-label">Número</InputLabel>
-                                :
-                                <InputLabel id="demo-simple-select-outlined-label">Tipo</InputLabel>
-                            }
-
-                            <Select
-                                labelId="demo-simple-select-outlined-label"
-                                id="demo-simple-select-outlined"
-                                label="Tipo"
-                                value={this.state.tipo}
-                                onChange={this.handleTipo}
-                            >
-                                <MenuItem value="">
-                                    <em>None</em>
-                                </MenuItem>
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </div>
-
-                    {this.state.recurso !== "Sala" ?
-                        <form className="quantidade">
+                        <form className="matricula">
                             <TextField
-                                id="quantidade-Id"
-                                label="Quantidade"
+                                id="matricula-Id"
+                                label="Matrícula"
                                 variant="outlined"
-                                value={this.state.quantidade}
-                                onChange={this.handleQuant}
+                                value={this.state.matricula}
+                                onChange={this.handleMat}
+
+
                             />
+
+
                         </form>
 
-                        :
-                        <form></form>
-                    }
+
+                        <div>
+
+                            <FormControl className="recursos" variant="outlined">
+                                <InputLabel id="demo-simple-select-outlined-label">Recurso</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-outlined-label"
+                                    id="demo-simple-select-outlined"
+                                    label="Recurso"
+                                    value={this.state.recurso}
+                                    onChange={this.handleRec}
+                                >
+                                    <MenuItem value="">
+                                        <em>None</em>
+                                    </MenuItem>
+                                    <MenuItem value={"Sala"}>Sala</MenuItem>
+                                    <MenuItem value={"Televisao"}>Televisao</MenuItem>
+                                    <MenuItem value={"Cadeira"}>Cadeira</MenuItem>
+                                </Select>
 
 
-                </Grid>
-            </MuiPickersUtilsProvider>
+                            </FormControl>
+                        </div>
+
+
+                        <div>
+                            <FormControl className="tipo" variant="outlined">
+                                {this.state.recurso === "Sala" ?
+                                    <InputLabel id="demo-simple-select-outlined-label">Número</InputLabel>
+                                    :
+                                    <InputLabel id="demo-simple-select-outlined-label">Tipo</InputLabel>
+                                }
+
+                                <Select
+                                    labelId="demo-simple-select-outlined-label"
+                                    id="demo-simple-select-outlined"
+                                    label="Tipo"
+                                    value={this.state.tipo}
+                                    onChange={this.handleTipo}
+                                >
+                                    <MenuItem value="">
+                                        <em>None</em>
+                                    </MenuItem>
+                                    <MenuItem value={10}>Ten</MenuItem>
+                                    <MenuItem value={20}>Twenty</MenuItem>
+                                    <MenuItem value={30}>Thirty</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+
+                        {this.state.recurso !== "Sala" ?
+                            <form className="quantidade">
+                                <TextField
+                                    id="quantidade-Id"
+                                    label="Quantidade do produto"
+                                    variant="outlined"
+                                    value={this.state.quantidade}
+                                    onChange={this.handleQuant}
+                                />
+                            </form>
+
+                            :
+                            <form></form>
+                        }
+
+                        <Button
+                            className="bReserva"
+                            variant="contained"
+                            size="large"
+                            startIcon={<SaveIcon/>}
+                        >
+                            Reservar
+                        </Button>
+
+
+                    </Grid>
+                </MuiPickersUtilsProvider>
+            </ThemeProvider>
         );
 
     }

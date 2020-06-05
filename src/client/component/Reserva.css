@@ -1,35 +1,59 @@
-.drop{
+body{
+    background-color: #282c34;
+}
+
+.drop1{
     position: relative;
-    left: 700px;
+    left: 570px;
     top: 100px;
+    text-decoration-color: white;
+
+}
+
+.drop2{
+    position: relative;
+    left: 800px;
+    top: 100px;
+    text-decoration-color: white;
+
 }
 
 .matricula{
     position: relative;
-    top: 280px;
-    right: 300px;
+    top: 250px;
+    right: -550px;
 }
 
 .recursos{
     position: relative;
-    top: 280px;
-    right: 300px;
+    top: 194px;
     width: 200px;
+    right: -850px;
 }
 
 .tipo{
     position: relative;
-    top: 280px;
-    right: 300px;
+    top: 138px;
+    right: -1120px;
     width: 200px;
 
 }
 
 .quantidade{
     position: relative;
-    top: 280px;
-    right: 300px;
+    top: 200px;
+    right: -850px;
+    width: 200px;
 
+}
+
+.bReserva{
+    position: relative;
+    top: 400px;
+    right: -870px;
+    height: 70px;
+    margin-top: 0px;
+    background-color: rgb(73, 79, 82);
 }
 
 
