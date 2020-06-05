@@ -4,8 +4,9 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 // Imports de Components
 // Vale notar que para o React Router, cada componente se trata de uma pagina
-import CalendarComponent from "./component/CalendarComponent";
 import Home from "./component/Home";
+import Reserva from "./component/Reserva";
+import CalendarComponent from "./component/CalendarComponent";
 import Error from "./component/Error";
 import Navigation from "./component/Navigation";
 
@@ -20,6 +21,7 @@ class App extends Component {
                     <Switch>
                         <Route path="/" component={Home} exact />
                         <Route path="/calendar" component={CalendarComponent} />
+                        <Route path="/reserva" component={Reserva} />
                         <Route component={Error} />
                     </Switch>
                 </div>
