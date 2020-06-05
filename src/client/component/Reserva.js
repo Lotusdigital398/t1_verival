@@ -1,5 +1,5 @@
 import 'date-fns';
-import React from 'react';
+import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import './Reserva.css'
@@ -7,137 +7,183 @@ import './Reserva.css'
 
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 
-import {makeStyles} from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
-import Input from "@material-ui/core/Input";
-import FilledInput from "@material-ui/core/FilledInput";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-
 import DateFnsUtils from '@date-io/date-fns';
 import {
     MuiPickersUtilsProvider,
-    KeyboardTimePicker,
     KeyboardDatePicker,
 
 } from '@material-ui/pickers';
 
+class Reserva extends Component {
 
-export default function Reserva() {
-    // The first commit of Material-UI
-    const [selectedDate, setSelectedDate] = React.useState(new Date());
-    const [recurso, setRecurso] = React.useState('');
-    const [tipo, setTipo] = React.useState('');
-    const [valor, setValor] = React.useState('');
-
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-    };
-
-    const handleChangeRecurso = (event) => {
-        setRecurso(event.target.value);
-    };
-
-    const handleChangeTipo = (event) => {
-        setTipo(event.target.value);
-    };
-
-    const handleChangeValor = (event) => {
-        setValor(event.target.value);
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            dataI: "",
+            dataF: "",
+            recurso: "",
+            matricula: "",
+            tipo: "",
+            quantidade: ""
+        }
+        this.handleDataI = this.handleDataI.bind(this)
+        this.handleDataF = this.handleDataF.bind(this)
+        this.handleRec = this.handleRec.bind(this)
+        this.handleTipo = this.handleTipo.bind(this)
+        this.handleMat = this.handleMat.bind(this)
+        this.handleQuant = this.handleQuant.bind(this)
+    }
 
 
-    return (
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Grid container justify="space-around">
-                <KeyboardDatePicker className="drop"
-                    disableToolbar
-                    variant="inline"
-                    format="dd/MM/yyyy"
-                    margin="normal"
-                    id="date-picker-inline"
-                    label="Date picker inline"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                        'aria-label': 'change date',
-                    }}
-                />
-                <KeyboardDatePicker className="drop"
-                    margin="normal"
-                    id="date-picker-dialog"
-                    label="Date picker dialog"
-                    format="dd/MM/yyyy"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                        'aria-label': 'change date',
-                    }}
-                />
+    handleDataI(event) {
+        console.log(event)
+        this.setState({dataI: event})
+    }
 
-                <form className="matricula">
-                    <TextField id="outlined-basic" label="Matrícula" variant="outlined"/>
-                </form>
+    handleDataF(event) {
+        console.log(event)
+        this.setState({dataF: event})
+    }
 
 
-                <div>
+    handleRec(event) {
+        console.log(event.target)
+        this.setState({recurso: event.target.value})
+    }
 
-                    <FormControl className="recursos" variant="outlined">
-                        <InputLabel id="demo-simple-select-outlined-label">Recurso</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-outlined-label"
-                            id="demo-simple-select-outlined"
-                            label="Recurso"
-                            value={recurso}
-                            onChange={handleChangeRecurso}
-                        >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
-                        </Select>
-                    </FormControl>
-                </div>
+    handleTipo(event) {
+        console.log(event)
+        this.setState({tipo: event.target.value})
+    }
 
 
-                <div>
-                    <FormControl className="tipo" variant="outlined">
-                        <InputLabel id="demo-simple-select-outlined-label">Tipo</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-outlined-label"
-                            id="demo-simple-select-outlined"
-                            label="Tipo"
-                            value={tipo}
-                            onChange={handleChangeTipo}
-                        >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
-                        </Select>
-                    </FormControl>
-                </div>
+    handleMat(event) {
+        console.log(event)
+        this.setState({matricula: event.target.value})
+    }
 
 
+    handleQuant(event) {
+        console.log(event)
+        this.setState({quantidade: event.target.value})
+    }
 
-                <form className="quantidade">
-                    <TextField id="outlined-basic" label="Quantidade" variant="outlined"/>
-                </form>
+
+    render() {
 
 
+        return (
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <Grid container justify="space-around">
+                    <KeyboardDatePicker className="drop"
+                                        disableToolbar
+                                        variant="inline"
+                                        format="dd/MM/yyyy"
+                                        margin="normal"
+                                        id="date-picker-inline"
+                                        label="Date picker inline"
+                                        value={this.state.dataI}
+                                        onChange={this.handleDataI}
+                                        KeyboardButtonProps={{
+                                            'aria-label': 'change date',
+                                        }}
+                    />
 
-            </Grid>
-        </MuiPickersUtilsProvider>
-    );
+
+                    <KeyboardDatePicker
+                        className="drop"
+                        disableToolbar
+                        variant="inline"
+                        format="dd/MM/yyyy"
+                        margin="normal"
+                        id="date-picker-inline"
+                        label="Date picker inline"
+                        value={this.state.dataF}
+                        onChange={this.handleDataF}
+                        KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                        }}
+                    />
+
+                    <form className="matricula">
+                        <TextField
+                            id="outlined-basic"
+                            label="Matrícula"
+                            variant="outlined"
+                            value={this.state.matricula}
+                            onChange={this.handleMat}
+
+
+                        />
+
+
+                    </form>
+
+
+                    <div>
+
+                        <FormControl className="recursos" variant="outlined">
+                            <InputLabel id="demo-simple-select-outlined-label">Recurso</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-outlined-label"
+                                id="demo-simple-select-outlined"
+                                label="Recurso"
+                                value={this.state.recurso}
+                                onChange={this.handleRec}
+                            >
+                                <MenuItem value="">
+                                </MenuItem>
+                                <MenuItem value={"Sala"}>Sala</MenuItem>
+                                <MenuItem value={"Televisao"}>Televisao</MenuItem>
+                                <MenuItem value={"Cadeira"}>Cadeira</MenuItem>
+                            </Select>
+
+
+                        </FormControl>
+                    </div>
+
+
+                    <div>
+                        <FormControl className="tipo" variant="outlined">
+                            <InputLabel id="demo-simple-select-outlined-label">Tipo</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-outlined-label"
+                                id="demo-simple-select-outlined"
+                                label="Tipo"
+                                value={this.state.tipo}
+                                onChange={this.handleTipo}
+                            >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
+                                <MenuItem value={10}>Ten</MenuItem>
+                                <MenuItem value={20}>Twenty</MenuItem>
+                                <MenuItem value={30}>Thirty</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
+
+
+                    <form className="quantidade">
+                        <TextField
+                            id="outlined-basic"
+                            label="Quantidade"
+                            variant="outlined"
+                            value={this.state.quantidade}
+                            onChange={this.handleQuant}
+                        />
+                    </form>
+
+
+                </Grid>
+            </MuiPickersUtilsProvider>
+        );
+
+    }
 }
+
+export default Reserva;
