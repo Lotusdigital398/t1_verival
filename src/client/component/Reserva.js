@@ -38,7 +38,7 @@ class Reserva extends Component {
             quantidade: "",
             recursos: [],
             tipos: [],
-            regexp : /^[0-9\b]+$/
+            regexp: /^[0-9\b]+$/
         }
         this.handleDataI = this.handleDataI.bind(this)
         this.handleDataF = this.handleDataF.bind(this)
@@ -46,6 +46,7 @@ class Reserva extends Component {
         this.handleTipo = this.handleTipo.bind(this)
         this.handleMat = this.handleMat.bind(this)
         this.handleQuant = this.handleQuant.bind(this)
+        this.setReserva = this.setReserva.bind(this)
     }
 
 
@@ -80,12 +81,40 @@ class Reserva extends Component {
         })
     }
 
+    setReserva() {
+        fetch('http://localhost:5000/setReserva', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'dataI': this.state.dataI,
+                'dataF': this.state.dataF,
+                'recurso': this.state.recurso,
+                'tipo': this.state.tipo,
+                'matricula': this.state.matricula,
+                'quantidade': this.state.quantidade
+            })
+        }).then(res => res.text()).then(res => {
+            if(res === "true"){
+                window.alert("Sua reserva foi efetuada com sucesso!")
+            } else{
+                window.alert("Erro: " + res)
+            }
+        })
+    }
+
+
     handleDataI(event) {
         this.setState({dataI: event})
+        if (this.state.recurso === "mobilia" && this.state.dataF.getTime() < (event.getTime() + 4 * 86400000)) {
+            this.state.dataF.setTime(event.getTime() + 4 * 86400000)
+        }
     }
 
     handleDataF(event) {
         this.setState({dataF: event})
+
     }
 
 
@@ -94,6 +123,10 @@ class Reserva extends Component {
         this.setState({tipo: ""})
         this.setState({quantidade: ""})
         this.getTipos(event.target.value)
+        if (event.target.value === "mobilia" && this.state.dataF.getTime() < (this.state.dataI.getTime() + 4 * 86400000)) {
+            this.state.dataF.setTime(this.state.dataI.getTime() + 4 * 86400000)
+        }
+
     }
 
     handleTipo(event) {
@@ -111,8 +144,6 @@ class Reserva extends Component {
             this.setState({quantidade: event.target.value})
         }
     }
-
-
 
 
     render() {
@@ -142,18 +173,34 @@ class Reserva extends Component {
                             onChange={this.handleDataI}
                         />
 
-                        <KeyboardDatePicker
-                            className="drop2"
-                            disableToolbar
-                            variant="inline"
-                            format="dd/MM/yyyy"
-                            margin="normal"
-                            id="dataFId"
-                            label="Date picker inline"
-                            minDate={this.state.dataI}
-                            value={this.state.dataF}
-                            onChange={this.handleDataF}
-                        />
+                        {this.state.recurso === "mobilia" ?
+                            <KeyboardDatePicker
+                                className="drop2"
+                                disableToolbar
+                                variant="inline"
+                                format="dd/MM/yyyy"
+                                margin="normal"
+                                id="dataFId"
+                                label="Date picker inline"
+                                minDate={this.state.dataI.getTime() + 4 * 86400000}
+                                value={this.state.dataF}
+                                onChange={this.handleDataF}
+                            />
+                            :
+                            <KeyboardDatePicker
+                                className="drop2"
+                                disableToolbar
+                                variant="inline"
+                                format="dd/MM/yyyy"
+                                margin="normal"
+                                id="dataFId"
+                                label="Date picker inline"
+                                minDate={this.state.dataI}
+                                value={this.state.dataF}
+                                onChange={this.handleDataF}
+                            />
+                        }
+
 
                         <form className="matricula">
                             <TextField
@@ -184,7 +231,8 @@ class Reserva extends Component {
                                 >
                                     {this.state.recursos.map((item) => {
                                         return (
-                                            <MenuItem style={{textTransform: 'capitalize'}} key={item} value={item}>{item}</MenuItem>
+                                            <MenuItem style={{textTransform: 'capitalize'}} key={item}
+                                                      value={item}>{item}</MenuItem>
                                         )
                                     })}
 
@@ -213,7 +261,8 @@ class Reserva extends Component {
                                 >
                                     {this.state.tipos.map((item) => {
                                         return (
-                                            <MenuItem style={{textTransform: 'capitalize'}} key={item} value={item}>{item}</MenuItem>
+                                            <MenuItem style={{textTransform: 'capitalize'}} key={item}
+                                                      value={item}>{item}</MenuItem>
                                         )
                                     })}
                                 </Select>
@@ -240,6 +289,7 @@ class Reserva extends Component {
                             variant="contained"
                             size="large"
                             startIcon={<SaveIcon/>}
+                            onClick={this.setReserva}
                         >
                             Reservar
                         </Button>
