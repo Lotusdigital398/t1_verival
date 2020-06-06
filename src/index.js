@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './client/index.css';
-import App from './client/App';
-import * as serviceWorker from './client/serviceWorker';
+import './client/pages/css/index.css';
+import App from './client/pages/App';
+import * as serviceWorker from './client/pages/serviceWorker';
 
 ReactDOM.render(
   <React.Fragment>

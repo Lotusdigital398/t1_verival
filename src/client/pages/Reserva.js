@@ -2,7 +2,7 @@ import 'date-fns';
 import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import './Reserva.css'
+import './css/Reserva.css'
 
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -94,9 +94,9 @@ class Reserva extends Component {
                 'quantidade': this.state.quantidade
             })
         }).then(res => res.text()).then(res => {
-            if(res === "true"){
+            if (res === "true") {
                 window.alert("Sua reserva foi efetuada com sucesso!")
-            } else{
+            } else {
                 window.alert("Erro: " + res)
             }
         })
@@ -107,6 +107,8 @@ class Reserva extends Component {
         this.setState({dataI: event})
         if (this.state.recurso === "mobilia" && this.state.dataF.getTime() < (event.getTime() + 4 * 86400000)) {
             this.state.dataF.setTime(event.getTime() + 4 * 86400000)
+        } else if (this.state.dataF.getTime() < (event.getTime())) {
+            this.state.dataF.setTime(event.getTime())
         }
     }
 
@@ -164,7 +166,7 @@ class Reserva extends Component {
                             format="dd/MM/yyyy"
                             margin="normal"
                             id="dataIId"
-                            label="Date picker inline"
+                            label="Data inicial"
                             minDate={today}
                             value={this.state.dataI}
                             onChange={this.handleDataI}
@@ -177,7 +179,7 @@ class Reserva extends Component {
                                 format="dd/MM/yyyy"
                                 margin="normal"
                                 id="dataFId"
-                                label="Date picker inline"
+                                label="Data final"
                                 minDate={this.state.dataI.getTime() + 4 * 86400000}
                                 value={this.state.dataF}
                                 onChange={this.handleDataF}
@@ -190,7 +192,7 @@ class Reserva extends Component {
                                 format="dd/MM/yyyy"
                                 margin="normal"
                                 id="dataFId"
-                                label="Date picker inline"
+                                label="Data final"
                                 minDate={this.state.dataI}
                                 value={this.state.dataF}
                                 onChange={this.handleDataF}

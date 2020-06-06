@@ -4,11 +4,11 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 // Imports de Components
 // Vale notar que para o React Router, cada componente se trata de uma pagina
-import Home from "./component/Home";
-import Reserva from "./component/Reserva";
-import CalendarComponent from "./component/CalendarComponent";
-import Error from "./component/Error";
-import Navigation from "./component/Navigation";
+import Home from "./Home";
+import Reserva from "./Reserva";
+import CalendarComponent from "../component/CalendarComponent";
+import Error from "./Error";
+import Navigation from "./Navigation";
 
 
 // Instanciacao das paginas disponiveis a serem acessadas na aplicacao
