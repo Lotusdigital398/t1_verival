@@ -29,8 +29,8 @@
   "sala": [
     {
       "tipo": "101",
-      "m2": 100,
-      "assento": 80,
+      "m2": "100",
+      "assento": "80",
       "reservas": [
         {
           "matricula": "17104173",
@@ -48,26 +48,26 @@
     },
     {
       "tipo": "102",
-      "m2": 80,
-      "assento": 64,
+      "m2": "80",
+      "assento": "64",
       "reservas": []
     },
     {
       "tipo": "103",
-      "m2": 60,
-      "assento": 48,
+      "m2": "60",
+      "assento": "48",
       "reservas": []
     },
     {
       "tipo": "104",
-      "m2": 60,
-      "assento": 48,
+      "m2": "60",
+      "assento": "48",
       "reservas": []
     },
     {
       "tipo": "105",
-      "m2": 40,
-      "assento": 32,
+      "m2": "40",
+      "assento": "32",
       "reservas": []
     }
   ],
@@ -110,7 +110,7 @@
           "dataInicio": "06-06-2020",
           "dataFim": "10-06-2020",
           "quantidade": "1",
-          "preco": 100
+          "preco": "100"
         }
       ]
     },
