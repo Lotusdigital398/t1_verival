@@ -113,6 +113,8 @@ class Reserva extends Component {
     }
 
 
+
+
     render() {
 
         const theme = createMuiTheme({
@@ -178,10 +180,11 @@ class Reserva extends Component {
                                     label="Recurso"
                                     value={this.state.recurso}
                                     onChange={this.handleRec}
+                                    style={{textTransform: 'capitalize'}}
                                 >
                                     {this.state.recursos.map((item) => {
                                         return (
-                                            <MenuItem key={item} value={item}>{item}</MenuItem>
+                                            <MenuItem style={{textTransform: 'capitalize'}} key={item} value={item}>{item}</MenuItem>
                                         )
                                     })}
 
@@ -194,7 +197,7 @@ class Reserva extends Component {
 
                         <div>
                             <FormControl className="tipo" variant="outlined">
-                                {this.state.recurso === "Sala" ?
+                                {this.state.recurso === "sala" ?
                                     <InputLabel id="demo-simple-select-outlined-label">Número</InputLabel>
                                     :
                                     <InputLabel id="demo-simple-select-outlined-label">Tipo</InputLabel>
@@ -206,17 +209,18 @@ class Reserva extends Component {
                                     label="Tipo"
                                     value={this.state.tipo}
                                     onChange={this.handleTipo}
+                                    style={{textTransform: 'capitalize'}}
                                 >
                                     {this.state.tipos.map((item) => {
                                         return (
-                                            <MenuItem key={item} value={item}>{item}</MenuItem>
+                                            <MenuItem style={{textTransform: 'capitalize'}} key={item} value={item}>{item}</MenuItem>
                                         )
                                     })}
                                 </Select>
                             </FormControl>
                         </div>
 
-                        {this.state.recurso !== "Sala" ?
+                        {this.state.recurso !== "sala" ?
                             <form className="quantidade">
                                 <TextField
                                     id="quantidade-Id"
