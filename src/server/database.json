@@ -29,27 +29,45 @@
   "sala": [
     {
       "tipo": "101",
-      "reservas": [{
-        "matricula":"17104173",
-        "dataInicio":"10-06-2020",
-        "dataFim":"12-06-2020",
-        "preco":"150"
-      }]
+      "m2": 100,
+      "assento": 80,
+      "reservas": [
+        {
+          "matricula": "17104173",
+          "dataInicio": "10-06-2020",
+          "dataFim": "12-06-2020",
+          "preco": "150"
+        },
+        {
+          "matricula": "17104156",
+          "dataInicio": "13-06-2020",
+          "dataFim": "17-06-2020",
+          "preco": "150"
+        }
+      ]
     },
     {
       "tipo": "102",
+      "m2": 80,
+      "assento": 64,
       "reservas": []
     },
     {
       "tipo": "103",
+      "m2": 60,
+      "assento": 48,
       "reservas": []
     },
     {
       "tipo": "104",
+      "m2": 60,
+      "assento": 48,
       "reservas": []
     },
     {
       "tipo": "105",
+      "m2": 40,
+      "assento": 32,
       "reservas": []
     }
   ],
@@ -57,22 +75,20 @@
     {
       "tipo": "cadeira",
       "totais": "200",
-      "indisponivel": "10",
       "preco": "5",
       "reservas": [
         {
-          "matricula":"17104173",
-          "dataInicio":"10-06-2020",
-          "dataFim":"12-06-2020",
-          "quantidade":"180",
-          "preco":"150"
+          "matricula": "17104173",
+          "dataInicio": "10-06-2020",
+          "dataFim": "12-06-2020",
+          "quantidade": "180",
+          "preco": "150"
         }
       ]
     },
     {
       "tipo": "mesa",
       "totais": "200",
-      "indisponivel": "0",
       "preco": "10",
       "reservas": []
     }
@@ -81,28 +97,38 @@
     {
       "tipo": "notebook",
       "totais": "70",
-      "indisponivel": "0",
       "preco": "10",
-      "reservas": []
+      "reservas": [
+        {
+          "matricula": "17104156",
+          "dataInicio": "06-06-2020",
+          "dataFim": "10-06-2020",
+          "quantidade": "69"
+        },
+        {
+          "matricula": "17104156",
+          "dataInicio": "06-06-2020",
+          "dataFim": "10-06-2020",
+          "quantidade": "1",
+          "preco": 100
+        }
+      ]
     },
     {
       "tipo": "mouse",
       "totais": "70",
-      "indisponivel": "0",
       "preco": "2",
       "reservas": []
     },
     {
       "tipo": "tablet",
       "totais": "20",
-      "indisponivel": "0",
       "preco": "10",
       "reservas": []
     },
     {
       "tipo": "smartphone",
       "totais": "20",
-      "indisponivel": "0",
       "preco": "10",
       "reservas": []
     }

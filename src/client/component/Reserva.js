@@ -4,12 +4,10 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import './Reserva.css'
 
-
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
 
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
@@ -159,7 +157,6 @@ class Reserva extends Component {
             <ThemeProvider theme={theme}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <Grid>
-
                         <KeyboardDatePicker
                             className="drop1"
                             disableToolbar
@@ -172,7 +169,6 @@ class Reserva extends Component {
                             value={this.state.dataI}
                             onChange={this.handleDataI}
                         />
-
                         {this.state.recurso === "mobilia" ?
                             <KeyboardDatePicker
                                 className="drop2"
@@ -200,8 +196,6 @@ class Reserva extends Component {
                                 onChange={this.handleDataF}
                             />
                         }
-
-
                         <form className="matricula">
                             <TextField
                                 id="matricula-Id"
@@ -212,13 +206,8 @@ class Reserva extends Component {
 
 
                             />
-
-
                         </form>
-
-
                         <div>
-
                             <FormControl className="recursos" variant="outlined">
                                 <InputLabel id="demo-simple-select-outlined-label">Recurso</InputLabel>
                                 <Select
@@ -237,12 +226,8 @@ class Reserva extends Component {
                                     })}
 
                                 </Select>
-
-
                             </FormControl>
                         </div>
-
-
                         <div>
                             <FormControl className="tipo" variant="outlined">
                                 {this.state.recurso === "sala" ?
@@ -261,14 +246,13 @@ class Reserva extends Component {
                                 >
                                     {this.state.tipos.map((item) => {
                                         return (
-                                            <MenuItem style={{textTransform: 'capitalize'}} key={item}
-                                                      value={item}>{item}</MenuItem>
+                                            <MenuItem style={{textTransform: 'capitalize'}} key={item.tipo}
+                                                      value={item.tipo}>{item.tipo}</MenuItem>
                                         )
                                     })}
                                 </Select>
                             </FormControl>
                         </div>
-
                         {this.state.recurso !== "sala" ?
                             <form className="quantidade">
                                 <TextField
@@ -283,7 +267,6 @@ class Reserva extends Component {
                             :
                             <form></form>
                         }
-
                         <Button
                             className="bReserva"
                             variant="contained"
@@ -293,8 +276,6 @@ class Reserva extends Component {
                         >
                             Reservar
                         </Button>
-
-
                     </Grid>
                 </MuiPickersUtilsProvider>
             </ThemeProvider>

@@ -17,80 +17,111 @@ app.get('/getTipos', function (req, res) {
     var list = []
     if (database[req.query.recurso]) {
         database[req.query.recurso].forEach((item) => {
-            list.push(item.tipo)
+            if (req.query.recurso === 'sala') {
+                list.push({
+                    'tipo': item.tipo,
+                    'm2': item.m2,
+                    'assento': item.assento
+                })
+            } else {
+                list.push({
+                    'tipo': item.tipo,
+                    'preco': item.preco
+                })
+            }
         })
-        console.log(list)
         res.send(list)
     } else {
-        console.log(false)
         res.send(false)
     }
 })
 
-app.post('/isDisponivel', function (req, res) {
+app.post('/setReserva', function (req, res) {
+    if (req.body.recurso === '' || req.body.tipo === '' || req.body.matricula === '' || req.body.preco === '' || (req.body.quantidade === '' && req.body.recurso !== 'sala')) {
+        res.send('Dados incompletos!')
+    } else {
+        let matriculaVal = false;
+        database.colaboradores.forEach((item) => {
+            if (item.matricula === req.body.matricula) {
+                matriculaVal = true
+            }
+        })
+        if (matriculaVal) {
+            res.send(isDisponivel(req))
+        } else {
+            res.send('Matrícula inválida!')
+        }
+    }
+})
+
+function isDisponivel(req) {
     const recurso = req.body.recurso
     const tipo = req.body.tipo
     var listDatas = []
-    var dataF = moment(req.body.dataFim, 'DD-MM-YYYY').format('DD-MM-YYYY')
-    var data = moment(req.body.dataInicio, 'DD-MM-YYYY')
-
+    var dataF = moment(req.body.dataF, 'YYYY-MM-DD').format('DD-MM-YYYY')
+    var dataI = moment(req.body.dataI, 'YYYY-MM-DD').format('DD-MM-YYYY')
+    var data = moment(req.body.dataI, 'YYYY-MM-DD')
     //cria lista com todas as datas em que estara alugado
     while (data.format('DD-MM-YYYY') !== dataF) {
         listDatas.push(data.format('DD-MM-YYYY'))
         data = data.add(1, 'days');
     }
     listDatas.push(data.format('DD-MM-YYYY'))
-    console.log(listDatas)
 
     //trata sala diferente de equipamento e mobilia
-    var disponivel = true
+    var disponivel = 'true'
     if (recurso === 'sala') {
         database.sala.forEach((item) => {
-                if (item.numero === req.body.numero) {
-                    item.reservas.forEach((reservas) => {
-                        listDatas.forEach((data) => {
-                            if (moment(data, 'DD-MM-YYYY').isBetween(moment(reservas.dataInicio, 'DD-MM-YYYY')
-                                , moment(reservas.dataFim, 'DD-MM-YYYY'), undefined, '[]')) {
-                                disponivel = false
-                            }
-                        })
-                    })
-                }
-            }
-        )
-    } else {
-        database[recurso].forEach((item) => {
-                if (item.tipo === tipo) {
+            if (item.tipo === tipo) {
+                item.reservas.forEach((reservas) => {
                     listDatas.forEach((data) => {
-                        var somaItens = 0
-                        item.reservas.forEach((reservas) => {
-                            if (moment(data, 'DD-MM-YYYY').isBetween(moment(reservas.dataInicio, 'DD-MM-YYYY')
-                                , moment(reservas.dataFim, 'DD-MM-YYYY'), undefined, '[]')) {
-                                somaItens += parseInt(reservas.quantidade)
-                            }
-                        })
-                        if (somaItens + parseInt(req.body.quantidade) > item.totais) {
-                            disponivel = false
+                        if (moment(data, 'DD-MM-YYYY').isBetween(moment(reservas.dataInicio, 'DD-MM-YYYY'),
+                            moment(reservas.dataFim, 'DD-MM-YYYY'), undefined, '[]')) {
+                            disponivel = 'Sala indisponível na data selecionada!'
                         }
                     })
+                })
+                if (disponivel === 'true') {
+                    item.reservas.push({
+                        "matricula": req.body.matricula,
+                        "dataInicio": dataI,
+                        "dataFim": dataF,
+                        "preco": req.body.preco
+                    })
+                    fs.writeFileSync('./src/server/database.json', JSON.stringify(database));
                 }
             }
-        )
+        })
+    } else {
+        database[recurso].forEach((item) => {
+            if (item.tipo === tipo) {
+                listDatas.forEach((data) => {
+                    var somaItens = 0
+                    item.reservas.forEach((reservas) => {
+                        if (moment(data, 'DD-MM-YYYY').isBetween(moment(reservas.dataInicio, 'DD-MM-YYYY'),
+                            moment(reservas.dataFim, 'DD-MM-YYYY'), undefined, '[]')) {
+                            somaItens += parseInt(reservas.quantidade)
+                        }
+                    })
+                    if (somaItens + parseInt(req.body.quantidade) > item.totais) {
+                        disponivel = 'Quantidade de ' + recurso + ' não disponível na data selecionada!'
+                    }
+                })
+                if (disponivel === 'true') {
+                    item.reservas.push({
+                        "matricula": req.body.matricula,
+                        "dataInicio": dataI,
+                        "dataFim": dataF,
+                        "quantidade": req.body.quantidade,
+                        "preco": 100
+                    })
+                    fs.writeFileSync('./src/server/database.json', JSON.stringify(database));
+                }
+            }
+        })
     }
-    res.send(disponivel)
-})
-app.post('/', function (req, res) {
-    res.send(req.body.nome)
-});
-
-
-const colaboradores = () => {
-    fs.readFile('./src/server/database.json', (err, data) => {
-        if (err) throw err;
-        let db = JSON.parse(data);
-
-        console.log(db);
-    });
+    console.log(disponivel)
+    return disponivel
 }
 
 moment.createFromInputFallback = function (config) {
