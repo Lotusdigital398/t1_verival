@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 
-import "../App.css";
-import "react-big-calendar/lib/css/react-big-calendar.css";
+import './Calendar.css'
+
 
 // Instanciacao do localizer, library que gerencia o tempo
 const localizer = momentLocalizer(moment);
