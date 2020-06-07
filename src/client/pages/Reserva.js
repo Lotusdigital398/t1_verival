@@ -111,19 +111,33 @@ class Reserva extends Component {
     handleDataI(event) {
         this.setState({dataI: event})
         if (this.state.recurso === "mobilia" && this.state.dataF.getTime() < (event.getTime() + 4 * 86400000)) {
-            this.state.dataF.setTime(event.getTime() + 4 * 86400000)
-        } else if (this.state.dataF.getTime() < (event.getTime())) {
-            this.state.dataF.setTime(event.getTime())
+            this.setState({dataF: (event.getTime() + 4 * 86400000)})
+
+            const dif = Math.ceil(((event.getTime() + 4 * 86400000) - event.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+            this.setState({diferencaTempo: dif});
+            this.calculaPreco(this.state.tipo, undefined, dif)
+        } else {
+            if (this.state.dataF < event.getTime()) {
+                this.setState({dataF: event})
+                const dif = Math.ceil((event.getTime() - event.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+                this.setState({diferencaTempo: dif});
+                this.calculaPreco(this.state.tipo, undefined, dif)
+            } else {
+                const dif = Math.ceil((this.state.dataF.getTime() - event.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+                this.setState({diferencaTempo: dif});
+                this.calculaPreco(this.state.tipo, undefined, dif)
+            }
         }
     }
 
     handleDataF(event) {
+        console.log(event)
         this.setState({dataF: event})
-        this.setState({diferencaTempo: Math.ceil((event.getTime() - this.state.dataI.getTime()) / (1000 * 60 * 60 * 24)) + 1});
+        const dif = Math.ceil((event.getTime() - this.state.dataI.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+        this.setState({diferencaTempo: dif});
         if (this.state.tipo !== '') {
             if (this.state.recurso !== '') {
-                console.log(this.state.tipo)
-                this.calculaPreco(this.state.tipo)
+                this.calculaPreco(this.state.tipo, undefined, dif)
             }
         }
     }
@@ -135,6 +149,7 @@ class Reserva extends Component {
         this.setState({quantidade: ""})
         this.getTipos(event.target.value)
         if (event.target.value === "mobilia" && this.state.dataF.getTime() < (this.state.dataI.getTime() + 4 * 86400000)) {
+            console.log(this.state.dataF)
             this.state.dataF.setTime(this.state.dataI.getTime() + 4 * 86400000)
         }
     }
@@ -154,18 +169,17 @@ class Reserva extends Component {
     handleQuant(event) {
         if (event.target.value === '' || this.state.regexp.test(event.target.value)) {
             this.setState({quantidade: event.target.value})
+            this.calculaPreco(this.state.tipo, event.target.value === '' ? '0' : event.target.value);
         }
-        this.calculaPreco(this.state.tipo, event.target.value);
-        console.log(event.target.value)
     }
-
 
     formatMoney(number) {
         return number.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
     }
 
-    calculaPreco(event, quant) {
+    calculaPreco(event, quant, dif) {
         var quantidade = quant ? quant : this.state.quantidade
+        var diferenca = dif ? dif : this.state.diferencaTempo
         var aux = 0;
         this.state.tipos.every(function (element, index) {
             if (element.tipo === event) {
@@ -175,11 +189,12 @@ class Reserva extends Component {
                 return true;
             }
         })
-
-        if (this.state.recurso === "sala") {
-            this.setState({precoTotal: this.state.precoM2 * this.state.tipos[aux].m2 * this.state.diferencaTempo})
-        } else {
-            this.setState({precoTotal: this.state.tipos[aux].preco * quantidade * this.state.diferencaTempo})
+        if (this.state.tipos[aux]) {
+            if (this.state.recurso === "sala") {
+                this.setState({precoTotal: this.state.precoM2 * this.state.tipos[aux].m2 * diferenca * quantidade})
+            } else {
+                this.setState({precoTotal: this.state.tipos[aux].preco * quantidade * diferenca})
+            }
         }
     }
 
