@@ -18,8 +18,40 @@ app.get('/getColaboradores', function (req, res) {
 })
 
 app.get('/getReservas', function (req, res) {
-    res.send(database.sala[0].reservas)
+    let listRecursos = []
+    database.sala.forEach((item) => {
+        item.reservas.forEach((item) => {
+            item.nome = getNome(item.matricula)
+            item.tipo = 'sala'
+            listRecursos.push(item)
+        })
+    })
+
+    database.mobilia.forEach((item) => {
+        item.reservas.forEach((item) => {
+            item.nome = getNome(item.matricula)
+            item.tipo = 'mobilia'
+            listRecursos.push(item)
+        })
+    })
+
+    database.equipamento.forEach((item) => {
+        item.reservas.forEach((item) => {
+            item.nome = getNome(item.matricula)
+            item.tipo = 'equipamento'
+            listRecursos.push(item)
+        })
+    })
+    res.send(listRecursos)
 })
+
+function getNome(matricula){
+    for (let col of database.colaboradores) {
+        if(col.matricula === matricula){
+            return col.nome
+        }
+    }
+}
 
 app.get('/getTipos', function (req, res) {
     var list = []
