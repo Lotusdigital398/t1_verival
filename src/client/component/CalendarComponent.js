@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Calendar, momentLocalizer } from "react-big-calendar";
+import React, {Component} from "react";
+import {Calendar, momentLocalizer} from "react-big-calendar";
 import moment from "moment";
 
 import './css/Calendar.css'
@@ -10,17 +10,49 @@ const localizer = momentLocalizer(moment);
 
 // Instanciacao padrao de um calendario da library BigCalendar
 class CalendarComponent extends Component {
-    state = {
-        events: [
-            {
-                start: moment().toDate(),
-                end: moment()
-                    .add(1, "days")
-                    .toDate(),
-                title: "Agendamentos de hoje"
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            events: [],
+            reservas: []
+        }
+        this.newEvent = this.newEvent.bind(this)
+        this.getReservas = this.getReservas.bind(this)
+    }
+
+    componentDidMount() {
+        this.getReservas();
+    }
+
+    getReservas() {
+        fetch('http://localhost:5000/getReservas', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
             }
-        ]
-    };
+        }).then(res => res.text()).then(res => {
+            JSON.parse(res).forEach(item => {
+                this.newEvent(item);
+            })
+        })
+    }
+
+    newEvent(event) {
+
+        let idList = this.state.events.map(a => a.id)
+        let newId = Math.max(...idList) + 1
+        let titulo = "Colaborador: " +  event.matricula + " " + parseInt(event.preco).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+        let hour = {
+            id: newId,
+            title: titulo,
+            start: moment(event.dataInicio, 'DD-MM-YYYY').toDate(),
+            end: moment(event.dataFim, 'DD-MM-YYYY').toDate(),
+        }
+        this.setState({
+            events: this.state.events.concat([hour]),
+        })
+    }
 
 
     render() {
@@ -32,7 +64,7 @@ class CalendarComponent extends Component {
                     defaultDate={new Date()}
                     defaultView="month"
                     events={this.state.events}
-                    style={{ height: "100vh" }}
+                    style={{height: "100vh"}}
                 />
             </div>
         );
