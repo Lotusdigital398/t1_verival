@@ -138,7 +138,6 @@ class Reserva extends Component {
         }
     }
 
-
     handleRec(event) {
         this.setState({recurso: event.target.value})
         this.setState({tipo: ""})
@@ -160,7 +159,6 @@ class Reserva extends Component {
     handleMat(event) {
         this.setState({matricula: event.target.value})
     }
-
 
     handleQuant(event) {
         if (event.target.value === '' || this.state.regexp.test(event.target.value)) {

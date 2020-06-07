@@ -13,6 +13,10 @@ app.get('/getRecursos', function (req, res) {
     res.send(["sala", "mobilia", "equipamento"])
 })
 
+app.get('/getColaboradores', function (req, res) {
+    res.send(database.colaboradores)
+})
+
 app.get('/getTipos', function (req, res) {
     var list = []
     if (database[req.query.recurso]) {
