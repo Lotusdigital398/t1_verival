@@ -17,6 +17,26 @@ app.get('/getColaboradores', function (req, res) {
     res.send(database.colaboradores)
 })
 
+app.delete('/deleteReserva', function (req, res) {
+    console.log(req.body.recurso)
+    let db = database
+    db[req.body.recurso].forEach((rec) => {
+        if(rec.tipo === req.body.tipo){
+            rec.reservas.forEach((item) => {
+                if(item.matricula === req.body.matricula && item.dataFim === req.body.dataFim &&
+                    item.dataInicio === req.body.dataInicio &&  item.preco === req.body.preco && item.quantidade === req.body.quantidade){
+                    var index = rec.reservas.indexOf(item);
+                    if (index > -1) {
+                        rec.reservas.splice(index, 1);
+                        fs.writeFileSync('./src/server/database.json', JSON.stringify(db));
+                    }
+                }
+            })
+        }
+    })
+    res.send(true)
+})
+
 app.get('/getReservas', function (req, res) {
     let listRecursos = []
     database.sala.forEach((sala) => {
