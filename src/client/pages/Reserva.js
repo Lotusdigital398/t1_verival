@@ -35,7 +35,7 @@ class Reserva extends Component {
             tipo: '',
             quantidade: "",
             precoM2: "10",
-            precoTotal: "0",
+            precoTotal: 0,
             diferencaTempo: 1,
             recursos: [],
             tipos: [],
@@ -121,7 +121,7 @@ class Reserva extends Component {
         this.setState({dataF: event})
         this.setState({diferencaTempo: Math.ceil((event.getTime() - this.state.dataI.getTime()) / (1000 * 60 * 60 * 24)) + 1});
         if (this.state.tipo !== '') {
-            if (this.state.recurso ==! "") {
+            if (this.state.recurso !== '') {
                 console.log(this.state.tipo)
                 this.calculaPreco(this.state.tipo)
             }
@@ -137,8 +137,6 @@ class Reserva extends Component {
         if (event.target.value === "mobilia" && this.state.dataF.getTime() < (this.state.dataI.getTime() + 4 * 86400000)) {
             this.state.dataF.setTime(this.state.dataI.getTime() + 4 * 86400000)
         }
-
-
     }
 
     handleTipo(event) {
@@ -157,7 +155,7 @@ class Reserva extends Component {
         if (event.target.value === '' || this.state.regexp.test(event.target.value)) {
             this.setState({quantidade: event.target.value})
         }
-        this.calculaPreco(event);
+        this.calculaPreco(this.state.tipo, event.target.value);
         console.log(event.target.value)
     }
 
@@ -166,27 +164,26 @@ class Reserva extends Component {
         return number.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
     }
 
-    calculaPreco(event) {
+    calculaPreco(event, quant) {
+        var quantidade = quant ? quant : this.state.quantidade
         var aux = 0;
         this.state.tipos.every(function (element, index) {
-
-            if (element.tipo == event) {
+            if (element.tipo === event) {
                 aux = index;
                 return false;
             } else {
-
                 return true;
             }
         })
+
         if (this.state.recurso === "sala") {
             this.setState({precoTotal: this.state.precoM2 * this.state.tipos[aux].m2 * this.state.diferencaTempo})
         } else {
-            this.setState({precoTotal: this.state.tipos[aux].preco * this.state.quantidade * this.state.diferencaTempo})
+            this.setState({precoTotal: this.state.tipos[aux].preco * quantidade * this.state.diferencaTempo})
         }
     }
 
     render() {
-
         const theme = createMuiTheme({
             palette: {
                 type: "dark"
@@ -200,7 +197,6 @@ class Reserva extends Component {
                     <Grid>
                         <h3>Preço da Reserva:</h3>
                         <h3>{this.formatMoney(this.state.precoTotal)}</h3>
-
 
                         <KeyboardDatePicker
                             className="drop1"
@@ -308,7 +304,6 @@ class Reserva extends Component {
                                     onChange={this.handleQuant}
                                 />
                             </form>
-
                             :
                             <form className="quantidade">
                                 <TextField
