@@ -42,7 +42,8 @@ class CalendarComponent extends Component {
 
         let idList = this.state.events.map(a => a.id)
         let newId = Math.max(...idList) + 1
-        let titulo = "Colaborador: " +  event.matricula + " " + parseInt(event.preco).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+        let tipo = event.tipo.charAt(0).toUpperCase() + event.tipo.slice(1)
+        let titulo = "Colaborador: " +  event.nome + " (" + event.matricula + ") " + "Reserva: " + tipo + " (" + parseInt(event.preco).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) + ")";
         let hour = {
             id: newId,
             title: titulo,
