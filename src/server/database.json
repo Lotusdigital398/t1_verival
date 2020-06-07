@@ -30,31 +30,26 @@
     {
       "tipo": "101",
       "m2": "100",
-      "assento": "80",
       "reservas": []
     },
     {
       "tipo": "102",
       "m2": "80",
-      "assento": "64",
       "reservas": []
     },
     {
       "tipo": "103",
       "m2": "60",
-      "assento": "48",
       "reservas": []
     },
     {
       "tipo": "104",
       "m2": "60",
-      "assento": "48",
       "reservas": []
     },
     {
       "tipo": "105",
       "m2": "40",
-      "assento": "32",
       "reservas": []
     }
   ],
@@ -63,7 +58,15 @@
       "tipo": "cadeira",
       "totais": "200",
       "preco": "5",
-      "reservas": []
+      "reservas": [
+        {
+          "matricula": "17104119",
+          "dataInicio": "07-06-2020",
+          "dataFim": "11-06-2020",
+          "quantidade": "2",
+          "preco": 10
+        }
+      ]
     },
     {
       "tipo": "mesa",

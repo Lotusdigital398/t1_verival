@@ -24,7 +24,6 @@ app.get('/getReservas', function (req, res) {
             item.nome = getNome(item.matricula)
             item.recurso = 'sala'
             item.tipo = sala.tipo
-            item.quantidade = parseInt(sala.assento) + parseInt(item.assento)
             listRecursos.push(item)
         })
     })
@@ -132,7 +131,7 @@ function isDisponivel(req) {
                         "dataInicio": dataI,
                         "dataFim": dataF,
                         "preco": req.body.preco,
-                        "assento": req.body.quantidade
+                        "quantidade": req.body.quantidade
                     })
                     fs.writeFileSync('./src/server/database.json', JSON.stringify(db));
                 }
