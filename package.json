@@ -23,6 +23,7 @@
     "react-spring": "^8.0.27"
   },
   "scripts": {
+    "test": "jest --watchAll",
     "server": "nodemon ./src/Server/server.js",
     "client": "react-scripts start",
     "dev": "concurrently \"npm run server\" \"npm run client\""
@@ -43,6 +44,9 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "react-test-renderer": "^16.13.1",
     "prop-types": "^15.7.2"
   }
 }
