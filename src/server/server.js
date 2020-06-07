@@ -19,26 +19,30 @@ app.get('/getColaboradores', function (req, res) {
 
 app.get('/getReservas', function (req, res) {
     let listRecursos = []
-    database.sala.forEach((item) => {
-        item.reservas.forEach((item) => {
+    database.sala.forEach((sala) => {
+        sala.reservas.forEach((item) => {
             item.nome = getNome(item.matricula)
-            item.tipo = 'sala'
+            item.recurso = 'sala'
+            item.tipo = sala.tipo
+            item.quantidade += sala.assento
             listRecursos.push(item)
         })
     })
 
-    database.mobilia.forEach((item) => {
-        item.reservas.forEach((item) => {
+    database.mobilia.forEach((mobilia) => {
+        mobilia.reservas.forEach((item) => {
             item.nome = getNome(item.matricula)
-            item.tipo = 'mobilia'
+            item.recurso = 'mobilia'
+            item.tipo = mobilia.tipo
             listRecursos.push(item)
         })
     })
 
-    database.equipamento.forEach((item) => {
-        item.reservas.forEach((item) => {
+    database.equipamento.forEach((equip) => {
+        equip.reservas.forEach((item) => {
             item.nome = getNome(item.matricula)
-            item.tipo = 'equipamento'
+            item.recurso = 'equip'
+            item.tipo = equip.tipo
             listRecursos.push(item)
         })
     })
@@ -126,7 +130,8 @@ function isDisponivel(req) {
                         "matricula": req.body.matricula,
                         "dataInicio": dataI,
                         "dataFim": dataF,
-                        "preco": req.body.preco
+                        "preco": req.body.preco,
+                        "assento": req.body.quantidade
                     })
                     fs.writeFileSync('./src/server/database.json', JSON.stringify(database));
                 }
@@ -153,7 +158,7 @@ function isDisponivel(req) {
                         "dataInicio": dataI,
                         "dataFim": dataF,
                         "quantidade": req.body.quantidade,
-                        "preco": 100
+                        "preco": req.body.preco
                     })
                     fs.writeFileSync('./src/server/database.json', JSON.stringify(database));
                 }
