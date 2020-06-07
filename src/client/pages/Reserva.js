@@ -48,6 +48,7 @@ class Reserva extends Component {
         this.handleMat = this.handleMat.bind(this)
         this.handleQuant = this.handleQuant.bind(this)
         this.setReserva = this.setReserva.bind(this)
+        this.calculaPreco = this.calculaPreco.bind(this)
     }
 
 
@@ -119,7 +120,12 @@ class Reserva extends Component {
     handleDataF(event) {
         this.setState({dataF: event})
         this.setState({diferencaTempo: Math.ceil((event.getTime() - this.state.dataI.getTime()) / (1000 * 60 * 60 * 24)) + 1});
-
+        if (this.state.tipo !== '') {
+            if (this.state.recurso ==! "") {
+                console.log(this.state.tipo)
+                this.calculaPreco(this.state.tipo)
+            }
+        }
     }
 
 
@@ -137,7 +143,8 @@ class Reserva extends Component {
 
     handleTipo(event) {
         this.setState({tipo: event.target.value})
-        this.calculaPreco();
+        this.calculaPreco(event.target.value);
+        console.log(event.target.value)
     }
 
 
@@ -150,22 +157,31 @@ class Reserva extends Component {
         if (event.target.value === '' || this.state.regexp.test(event.target.value)) {
             this.setState({quantidade: event.target.value})
         }
-        this.calculaPreco();
+        this.calculaPreco(event);
+        console.log(event.target.value)
     }
-
 
 
     formatMoney(number) {
         return number.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
     }
 
-    calculaPreco() {
+    calculaPreco(event) {
+        var aux = 0;
+        this.state.tipos.every(function (element, index) {
 
-        console.log(this.state.tipos.preco)
+            if (element.tipo == event) {
+                aux = index;
+                return false;
+            } else {
+
+                return true;
+            }
+        })
         if (this.state.recurso === "sala") {
-            this.setState({precoTotal: this.state.precoM2 * parseInt(this.state.tipos.m2) * this.state.diferencaTempo})
+            this.setState({precoTotal: this.state.precoM2 * this.state.tipos[aux].m2 * this.state.diferencaTempo})
         } else {
-           this.setState({precoTotal: this.state.tipos.preco * this.state.quantidade * this.state.diferencaTempo})
+            this.setState({precoTotal: this.state.tipos[aux].preco * this.state.quantidade * this.state.diferencaTempo})
         }
     }
 
