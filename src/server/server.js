@@ -17,6 +17,10 @@ app.get('/getColaboradores', function (req, res) {
     res.send(database.colaboradores)
 })
 
+app.get('/getReservas', function (req, res) {
+    res.send(database.sala[0].reservas)
+})
+
 app.get('/getTipos', function (req, res) {
     var list = []
     if (database[req.query.recurso]) {
