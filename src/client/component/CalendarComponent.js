@@ -17,7 +17,7 @@ class CalendarComponent extends Component {
                 end: moment()
                     .add(1, "days")
                     .toDate(),
-                title: "Some title"
+                title: "Agendamentos de hoje"
             }
         ]
     };
