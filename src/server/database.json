@@ -31,20 +31,7 @@
       "tipo": "101",
       "m2": "100",
       "assento": "80",
-      "reservas": [
-        {
-          "matricula": "17104173",
-          "dataInicio": "10-06-2020",
-          "dataFim": "12-06-2020",
-          "preco": "150"
-        },
-        {
-          "matricula": "17104156",
-          "dataInicio": "13-06-2020",
-          "dataFim": "17-06-2020",
-          "preco": "150"
-        }
-      ]
+      "reservas": []
     },
     {
       "tipo": "102",
@@ -76,15 +63,7 @@
       "tipo": "cadeira",
       "totais": "200",
       "preco": "5",
-      "reservas": [
-        {
-          "matricula": "17104173",
-          "dataInicio": "10-06-2020",
-          "dataFim": "12-06-2020",
-          "quantidade": "180",
-          "preco": "150"
-        }
-      ]
+      "reservas": []
     },
     {
       "tipo": "mesa",
@@ -98,22 +77,7 @@
       "tipo": "notebook",
       "totais": "70",
       "preco": "10",
-      "reservas": [
-        {
-          "matricula": "17104156",
-          "dataInicio": "06-06-2020",
-          "dataFim": "10-06-2020",
-          "quantidade": "69",
-          "preco": "150"
-        },
-        {
-          "matricula": "17104156",
-          "dataInicio": "06-06-2020",
-          "dataFim": "10-06-2020",
-          "quantidade": "1",
-          "preco": "100"
-        }
-      ]
+      "reservas": []
     },
     {
       "tipo": "mouse",

@@ -95,8 +95,8 @@ class Reserva extends Component {
                 'recurso': this.state.recurso,
                 'tipo': this.state.tipo,
                 'matricula': this.state.matricula,
-                'quantidade': this.state.quantidade
-
+                'quantidade': this.state.quantidade,
+                'preco': this.state.precoTotal
             })
         }).then(res => res.text()).then(res => {
             if (res === "true") {

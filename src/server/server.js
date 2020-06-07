@@ -24,7 +24,7 @@ app.get('/getReservas', function (req, res) {
             item.nome = getNome(item.matricula)
             item.recurso = 'sala'
             item.tipo = sala.tipo
-            item.quantidade += sala.assento
+            item.quantidade = parseInt(sala.assento) + parseInt(item.assento)
             listRecursos.push(item)
         })
     })
@@ -41,7 +41,7 @@ app.get('/getReservas', function (req, res) {
     database.equipamento.forEach((equip) => {
         equip.reservas.forEach((item) => {
             item.nome = getNome(item.matricula)
-            item.recurso = 'equip'
+            item.recurso = 'equipamento'
             item.tipo = equip.tipo
             listRecursos.push(item)
         })
@@ -105,6 +105,7 @@ function isDisponivel(req) {
     var dataF = moment(req.body.dataF, 'YYYY-MM-DD').format('DD-MM-YYYY')
     var dataI = moment(req.body.dataI, 'YYYY-MM-DD').format('DD-MM-YYYY')
     var data = moment(req.body.dataI, 'YYYY-MM-DD')
+    var db = database
     //cria lista com todas as datas em que estara alugado
     while (data.format('DD-MM-YYYY') !== dataF) {
         listDatas.push(data.format('DD-MM-YYYY'))
@@ -115,7 +116,7 @@ function isDisponivel(req) {
     //trata sala diferente de equipamento e mobilia
     var disponivel = 'true'
     if (recurso === 'sala') {
-        database.sala.forEach((item) => {
+        db.sala.forEach((item) => {
             if (item.tipo === tipo) {
                 item.reservas.forEach((reservas) => {
                     listDatas.forEach((data) => {
@@ -133,12 +134,12 @@ function isDisponivel(req) {
                         "preco": req.body.preco,
                         "assento": req.body.quantidade
                     })
-                    fs.writeFileSync('./src/server/database.json', JSON.stringify(database));
+                    fs.writeFileSync('./src/server/database.json', JSON.stringify(db));
                 }
             }
         })
     } else {
-        database[recurso].forEach((item) => {
+        db[recurso].forEach((item) => {
             if (item.tipo === tipo) {
                 listDatas.forEach((data) => {
                     var somaItens = 0
@@ -160,7 +161,7 @@ function isDisponivel(req) {
                         "quantidade": req.body.quantidade,
                         "preco": req.body.preco
                     })
-                    fs.writeFileSync('./src/server/database.json', JSON.stringify(database));
+                    fs.writeFileSync('./src/server/database.json', JSON.stringify(db));
                 }
             }
         })
