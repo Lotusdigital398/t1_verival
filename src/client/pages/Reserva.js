@@ -34,6 +34,9 @@ class Reserva extends Component {
             matricula: "",
             tipo: '',
             quantidade: "",
+            precoM2: "10",
+            precoTotal: "0",
+            diferencaTempo: 1,
             recursos: [],
             tipos: [],
             regexp: /^[0-9\b]+$/
@@ -92,6 +95,7 @@ class Reserva extends Component {
                 'tipo': this.state.tipo,
                 'matricula': this.state.matricula,
                 'quantidade': this.state.quantidade
+
             })
         }).then(res => res.text()).then(res => {
             if (res === "true") {
@@ -114,6 +118,7 @@ class Reserva extends Component {
 
     handleDataF(event) {
         this.setState({dataF: event})
+        this.setState({diferencaTempo: Math.ceil((event.getTime() - this.state.dataI.getTime()) / (1000 * 60 * 60 * 24)) + 1});
 
     }
 
@@ -127,10 +132,12 @@ class Reserva extends Component {
             this.state.dataF.setTime(this.state.dataI.getTime() + 4 * 86400000)
         }
 
+
     }
 
     handleTipo(event) {
         this.setState({tipo: event.target.value})
+        this.calculaPreco();
     }
 
 
@@ -143,8 +150,24 @@ class Reserva extends Component {
         if (event.target.value === '' || this.state.regexp.test(event.target.value)) {
             this.setState({quantidade: event.target.value})
         }
+        this.calculaPreco();
     }
 
+
+
+    formatMoney(number) {
+        return number.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+    }
+
+    calculaPreco() {
+
+        console.log(this.state.tipos.preco)
+        if (this.state.recurso === "sala") {
+            this.setState({precoTotal: this.state.precoM2 * parseInt(this.state.tipos.m2) * this.state.diferencaTempo})
+        } else {
+           this.setState({precoTotal: this.state.tipos.preco * this.state.quantidade * this.state.diferencaTempo})
+        }
+    }
 
     render() {
 
@@ -159,6 +182,10 @@ class Reserva extends Component {
             <ThemeProvider theme={theme}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <Grid>
+                        <h3>Preço da Reserva:</h3>
+                        <h3>{this.formatMoney(this.state.precoTotal)}</h3>
+
+
                         <KeyboardDatePicker
                             className="drop1"
                             disableToolbar
@@ -267,7 +294,15 @@ class Reserva extends Component {
                             </form>
 
                             :
-                            <form></form>
+                            <form className="quantidade">
+                                <TextField
+                                    id="quantidade-Id"
+                                    label="Quantidade de assentos"
+                                    variant="outlined"
+                                    value={this.state.quantidade}
+                                    onChange={this.handleQuant}
+                                />
+                            </form>
                         }
                         <Button
                             className="bReserva"
