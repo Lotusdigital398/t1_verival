@@ -113,13 +113,13 @@ class Reserva extends Component {
         let dif;
         if (this.state.recurso === "mobilia" && this.state.dataF.getTime() < (event.getTime() + 4 * 86400000)) {
             this.setState({dataF: new Date(event.getTime() + 4 * 86400000)})
-            dif = Math.ceil(((event.getTime() + 4 * 86400000) - event.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+            dif = Math.ceil(((event.getTime() + 4 * 86400000) - event.getTime()) / (86400000)) + 1;
         } else {
             if (this.state.dataF < event.getTime()) {
                 this.setState({dataF: event})
-                dif = Math.ceil((event.getTime() - event.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+                dif = Math.ceil((event.getTime() - event.getTime()) / (86400000)) + 1;
             } else {
-                dif = Math.ceil((this.state.dataF.getTime() - event.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+                dif = Math.ceil((this.state.dataF.getTime() - event.getTime()) / (86400000)) + 1;
             }
         }
         this.setState({diferencaTempo: dif});
@@ -129,7 +129,7 @@ class Reserva extends Component {
     handleDataF(event) {
         console.log(event)
         this.setState({dataF: event})
-        const dif = Math.ceil((event.getTime() - this.state.dataI.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+        const dif = Math.ceil((event.getTime() - this.state.dataI.getTime()) / (86400000)) + 1;
         this.setState({diferencaTempo: dif});
         if (this.state.tipo !== '') {
             if (this.state.recurso !== '') {
