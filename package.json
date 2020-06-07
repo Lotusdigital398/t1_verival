@@ -19,7 +19,8 @@
     "react-big-calendar": "^0.25.0",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "react-spring": "^8.0.27"
   },
   "scripts": {
     "server": "nodemon ./src/Server/server.js",
@@ -40,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prop-types": "^15.7.2"
   }
 }
