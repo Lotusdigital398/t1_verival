@@ -20,6 +20,59 @@ app.get('/getColaboradores', function (req, res) {
     res.send(database.colaboradores)
 })
 
+app.get('/getQuantidade', function (req, res) {
+
+    const listDatas = [];
+    const dataF = moment(req.query.dataF, 'YYYY-MM-DD').format('DD-MM-YYYY');
+    console.log(req.query.dataF)
+    console.log(dataF)
+    let data = moment(req.query.dataI, 'YYYY-MM-DD');
+    while (data.format('DD-MM-YYYY') !== dataF) {
+        listDatas.push(data.format('DD-MM-YYYY'))
+        data = data.add(1, 'days');
+    }
+    listDatas.push(data.format('DD-MM-YYYY'))
+    console.log(listDatas)
+    let ver = 0
+
+    if (req.query.recurso === 'sala') {
+        database.sala.forEach((item) => {
+            if (item.tipo === req.query.tipo) {
+                ver = 1
+                item.reservas.forEach((reservas) => {
+                    listDatas.forEach((data) => {
+                        if (moment(data, 'DD-MM-YYYY').isBetween(moment(reservas.dataInicio, 'DD-MM-YYYY'),
+                            moment(reservas.dataFim, 'DD-MM-YYYY'), undefined, '[]')) {
+                            ver = 0
+                        }
+                    })
+                })
+            }
+        })
+    } else {
+        database[req.query.recurso].forEach((item) => {
+            if (item.tipo === req.query.tipo) {
+                ver = parseInt(item.quantidade)
+                console.log(item.quantidade)
+                listDatas.forEach((data) => {
+                    let somaItens = 0;
+                    item.reservas.forEach((reservas) => {
+                        console.log(moment(data, 'DD-MM-YYYY'))
+                        if (moment(data, 'DD-MM-YYYY').isBetween(moment(reservas.dataInicio, 'DD-MM-YYYY'),
+                            moment(reservas.dataFim, 'DD-MM-YYYY'), undefined, '[]')) {
+                            somaItens += parseInt(reservas.quantidade)
+                        }
+                    })
+                    if (parseInt(item.quantidade) - somaItens < ver) {
+                        ver = parseInt(item.quantidade) - somaItens
+                    }
+                })
+            }
+        })
+    }
+    res.send(ver + '')
+})
+
 app.get('/somaRecursos', function (req, res) {
     let total = 0
     let obj = {}
@@ -157,6 +210,7 @@ app.get('/getTipos', function (req, res) {
 })
 
 app.post('/setReserva', function (req, res) {
+    console.log(req.body.dataI)
     if (req.body.recurso === '' || req.body.tipo === '' || req.body.matricula === '' || req.body.preco === '' ||
         req.body.quantidade === '' || (req.body.quantidade === '0' && req.body.recurso !== 'sala')) {
         res.send('Dados incompletos!')

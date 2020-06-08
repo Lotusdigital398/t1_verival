@@ -31,6 +31,7 @@ class Reserva extends Component {
             diferencaTempo: 1,
             recursos: [],
             tipos: [],
+            quantDisp: '',
             modal: false,
             regexp: /^[0-9\b]+$/
         }
@@ -74,6 +75,18 @@ class Reserva extends Component {
             } else {
                 this.setState({tipos: JSON.parse(res)})
             }
+        })
+    }
+
+    getQuantidade(t, i, f) {
+        console.log(f)
+        fetch(`http://localhost:5000/getQuantidade?recurso=${this.state.recurso}&tipo=${t ? t : this.state.tipo}&dataI=${i ? i : this.state.dataI}&dataF=${f ? new Date(f.getTime()) : this.state.dataF}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.text()).then(res => {
+            this.setState({quantDisp: res})
         })
     }
 
@@ -131,6 +144,7 @@ class Reserva extends Component {
         }
         this.setState({diferencaTempo: dif});
         this.calculaPreco(this.state.tipo, undefined, dif)
+        this.getQuantidade(undefined, event)
     }
 
     handleDataF(event) {
@@ -142,6 +156,7 @@ class Reserva extends Component {
                 this.calculaPreco(this.state.tipo, undefined, dif)
             }
         }
+        this.getQuantidade(undefined, undefined, event)
     }
 
     handleRec(event) {
@@ -157,6 +172,7 @@ class Reserva extends Component {
     handleTipo(event) {
         this.setState({tipo: event.target.value})
         this.calculaPreco(event.target.value);
+        this.getQuantidade(event.target.value)
     }
 
 
@@ -204,7 +220,7 @@ class Reserva extends Component {
         const theme = createMuiTheme({
             palette: {type: "dark"}
         });
-
+console.log(this.state.dataI)
         return (
             <ThemeProvider theme={theme}>
 
@@ -222,6 +238,7 @@ class Reserva extends Component {
                     <Grid>
                         <h3 align="center" style={{color: 'white'}}>Preço da Reserva:</h3>
                         <h3 align="center" style={{color: 'green'}}>{this.formatMoney(this.state.precoTotal)}</h3>
+                        <h3 align="center" style={{color: 'purple'}}>{this.state.quantDisp}</h3>
 
                         <KeyboardDatePicker
                             className="drop1"
