@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Calendar, momentLocalizer} from "react-big-calendar";
 import moment from "moment";
 import './css/Calendar.css'
+import './css/Modal.css'
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 // Instanciacao do localizer, library que gerencia o tempo
 const localizer = momentLocalizer(moment);
