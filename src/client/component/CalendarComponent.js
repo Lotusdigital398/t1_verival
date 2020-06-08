@@ -47,7 +47,7 @@ class CalendarComponent extends Component {
 
     newEvent(event) {
         let idList = this.state.events.map(a => a.id)
-        let newId = Math.max(...idList) + 1
+        let newId = Math.max(idList) + 1
         var msg = event.recurso === 'sala' ? "Quantidade de Assentos: " : "Quantidade: ";
         let tipo = event.tipo.charAt(0).toUpperCase() + event.tipo.slice(1)
         let rec = event.recurso.charAt(0).toUpperCase() + event.recurso.slice(1)
@@ -55,6 +55,7 @@ class CalendarComponent extends Component {
             style: 'currency',
             currency: 'BRL'
         }) + ")";
+        event.id = newId
         let hour = {
             id: newId,
             title: titulo,
@@ -80,7 +81,14 @@ class CalendarComponent extends Component {
             if (res === 'true') {
                 this.setState((prevState) => {
                     const events = [...prevState.events]
-                    const idx = events.indexOf(this.state.obj)
+                    let idx = 0;
+                    console.log(events)
+                    for (const [index, value] of events.entries()) {
+                        if(value.obj.id === this.state.obj.id){
+                            idx = index
+                            break
+                        }
+                    }
                     events.splice(idx, 1);
                     return {events};
                 });
