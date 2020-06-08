@@ -68,6 +68,7 @@ class CalendarComponent extends Component {
     }
 
     onDelete() {
+        console.log(this.state.obj)
         fetch('http://localhost:5000/deleteReserva', {
             method: 'DELETE',
             headers: {
@@ -80,14 +81,12 @@ class CalendarComponent extends Component {
             if (res === 'true') {
                 this.setState((prevState) => {
                     const events = [...prevState.events]
-                    const idx = events.indexOf(this.state.obj)
-                    events.splice(idx, 1);
+                    events.splice(this.state.obj.id, 1);
                     return {events};
                 });
                 this.setState({modal: !this.state.modal, obj: {}})
-                console.log(res)
             } else {
-                console.log('erro')
+                console.log('error: ' + res)
             }
         })
     }
@@ -115,7 +114,10 @@ class CalendarComponent extends Component {
                         Recurso: {this.state.obj ? this.state.obj.recurso : ''}<br/>
                         Tipo: {this.state.obj ? this.state.obj.tipo : ''}<br/>
                         Quantidade: {this.state.obj ? this.state.obj.quantidade : ''}<br/>
-                        Preço: {this.state.obj && this.state.obj.preco ? this.state.obj.preco.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) : ''}
+                        Preço: {this.state.obj && this.state.obj.preco ? this.state.obj.preco.toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    }) : ''}
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.onDelete}>Excluir</Button>{' '}
