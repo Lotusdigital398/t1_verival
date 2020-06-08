@@ -145,28 +145,31 @@ app.get('/getReservas', function (req, res) {
     let listRecursos = []
     database.sala.forEach((sala) => {
         sala.reservas.forEach((item) => {
-            item.nome = getNome(item.matricula)
-            item.recurso = 'sala'
-            item.tipo = sala.tipo
-            listRecursos.push(item)
+            const i = {...item}
+            i.nome = getNome(item.matricula)
+            i.recurso = 'sala'
+            i.tipo = sala.tipo
+            listRecursos.push(i)
         })
     })
 
     database.mobilia.forEach((mobilia) => {
         mobilia.reservas.forEach((item) => {
-            item.nome = getNome(item.matricula)
-            item.recurso = 'mobilia'
-            item.tipo = mobilia.tipo
-            listRecursos.push(item)
+            const i = {...item}
+            i.nome = getNome(item.matricula)
+            i.recurso = 'mobilia'
+            i.tipo = mobilia.tipo
+            listRecursos.push(i)
         })
     })
 
     database.equipamento.forEach((equip) => {
         equip.reservas.forEach((item) => {
-            item.nome = getNome(item.matricula)
-            item.recurso = 'equipamento'
-            item.tipo = equip.tipo
-            listRecursos.push(item)
+            const i = {...item}
+            i.nome = getNome(item.matricula)
+            i.recurso = 'equipamento'
+            i.tipo = equip.tipo
+            listRecursos.push(i)
         })
     })
     res.send(listRecursos)
@@ -204,7 +207,6 @@ app.get('/getTipos', function (req, res) {
 })
 
 app.post('/setReserva', function (req, res) {
-    console.log('setReserva req dataf: ' + req.body.dataF)
     if (req.body.recurso === '' || req.body.tipo === '' || req.body.matricula === '' || req.body.preco === '' ||
         req.body.quantidade === '' || (req.body.quantidade === '0' && req.body.recurso !== 'sala')) {
         res.send('Dados incompletos!')
@@ -273,7 +275,6 @@ function isDisponivel(req) {
                             somaItens += parseInt(reservas.quantidade)
                         }
                     })
-                    console.log(parseInt(req.body.quantidade))
                     if (somaItens + parseInt(req.body.quantidade) > parseInt(item.quantidade)) {
                         disponivel = 'Quantidade de ' + recurso + ' não disponível na data selecionada!'
                     }

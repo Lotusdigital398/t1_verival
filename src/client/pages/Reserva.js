@@ -79,19 +79,19 @@ class Reserva extends Component {
     }
 
     getQuantidade(t, i, f) {
-        console.log(this.state.dataF.getTime())
-        fetch(`http://localhost:5000/getQuantidade?recurso=${this.state.recurso}&tipo=${t ? t : this.state.tipo}&dataI=${i ? i : this.state.dataI}&dataF=${f ? new Date(f.getTime()) : this.state.dataF}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => res.text()).then(res => {
-            this.setState({quantDisp: res})
-        })
+        if (this.state.tipo !== '' || t) {
+            fetch(`http://localhost:5000/getQuantidade?recurso=${this.state.recurso}&tipo=${t ? t : this.state.tipo}&dataI=${i ? i : this.state.dataI}&dataF=${f ? new Date(f.getTime()) : this.state.dataF}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.text()).then(res => {
+                this.setState({quantDisp: res})
+            })
+        }
     }
 
     setReserva() {
-        console.log('aaaaaaaaaaaaaaaaaaa'+this.state.dataF)
         fetch('http://localhost:5000/setReserva', {
             method: 'POST',
             headers: {
@@ -131,14 +131,17 @@ class Reserva extends Component {
     }
 
     handleDataI(event) {
+        let fim = this.state.dataF
         this.setState({dataI: event})
         let dif;
         if (this.state.recurso === "mobilia" && this.state.dataF.getTime() < (event.getTime() + 4 * 86400000)) {
             this.setState({dataF: new Date(event.getTime() + 4 * 86400000)})
+            fim = event.getTime() + 4 * 86400000
             dif = Math.ceil(((event.getTime() + 4 * 86400000) - event.getTime()) / (86400000)) + 1;
         } else {
             if (this.state.dataF < event.getTime()) {
                 this.setState({dataF: event})
+                fim = event
                 dif = Math.ceil((event.getTime() - event.getTime()) / (86400000)) + 1;
             } else {
                 dif = Math.ceil((this.state.dataF.getTime() - event.getTime()) / (86400000)) + 1;
@@ -146,7 +149,7 @@ class Reserva extends Component {
         }
         this.setState({diferencaTempo: dif});
         this.calculaPreco(this.state.tipo, undefined, dif)
-        this.getQuantidade(undefined, event)
+        this.getQuantidade(undefined, event, fim)
     }
 
     handleDataF(event) {
@@ -162,7 +165,7 @@ class Reserva extends Component {
     }
 
     handleRec(event) {
-        this.setState({recurso: event.target.value})
+        this.setState({recurso: event.target.value, quantDisp: ''})
         this.setState({tipo: ""})
         this.setState({quantidade: ""})
         this.getTipos(event.target.value)
@@ -222,7 +225,6 @@ class Reserva extends Component {
         const theme = createMuiTheme({
             palette: {type: "dark"}
         });
-console.log(this.state.dataI)
         return (
             <ThemeProvider theme={theme}>
 

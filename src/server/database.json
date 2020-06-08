@@ -51,10 +51,7 @@
           "dataInicio": "08-06-2020",
           "dataFim": "08-06-2020",
           "preco": 1200,
-          "quantidade": "2",
-          "nome": "Lucas Schell",
-          "recurso": "sala",
-          "tipo": "103"
+          "quantidade": "2"
         }
       ]
     },
@@ -72,10 +69,7 @@
           "dataInicio": "08-06-2020",
           "dataFim": "11-06-2020",
           "preco": 80000,
-          "quantidade": "50",
-          "nome": "Lucas Schell",
-          "recurso": "sala",
-          "tipo": "105"
+          "quantidade": "50"
         }
       ]
     }
@@ -91,10 +85,7 @@
           "dataInicio": "08-06-2020",
           "dataFim": "12-06-2020",
           "quantidade": "50",
-          "preco": 250,
-          "nome": "Lucas Schell",
-          "recurso": "mobilia",
-          "tipo": "cadeira"
+          "preco": 250
         }
       ]
     },
@@ -108,20 +99,14 @@
           "dataInicio": "08-05-2020",
           "dataFim": "12-06-2020",
           "quantidade": "1",
-          "preco": 10,
-          "nome": "Lucas Schell",
-          "recurso": "mobilia",
-          "tipo": "mesa"
+          "preco": 10
         },
         {
           "matricula": "17104156",
           "dataInicio": "08-06-2020",
           "dataFim": "12-06-2020",
           "quantidade": "1",
-          "preco": 10,
-          "nome": "Lucas Schell",
-          "recurso": "mobilia",
-          "tipo": "mesa"
+          "preco": 10
         },
         {
           "matricula": "17104156",
@@ -150,20 +135,21 @@
           "dataInicio": "08-06-2020",
           "dataFim": "08-06-2020",
           "quantidade": "10",
-          "preco": 20,
-          "nome": "Lucas Schell",
-          "recurso": "equipamento",
-          "tipo": "mouse"
+          "preco": 20
         },
         {
           "matricula": "17104119",
           "dataInicio": "08-06-2020",
           "dataFim": "09-06-2020",
           "quantidade": "2",
-          "preco": 8,
-          "nome": "Gabriel Castro",
-          "recurso": "equipamento",
-          "tipo": "mouse"
+          "preco": 8
+        },
+        {
+          "matricula": "17104156",
+          "dataInicio": "08-06-2020",
+          "dataFim": "08-06-2020",
+          "quantidade": "1",
+          "preco": 2
         }
       ]
     },
@@ -183,10 +169,7 @@
           "dataInicio": "08-06-2020",
           "dataFim": "21-06-2020",
           "quantidade": "5",
-          "preco": 7000,
-          "nome": "Lucas Schell",
-          "recurso": "equipamento",
-          "tipo": "smartphone"
+          "preco": 7000
         }
       ]
     }

@@ -43,6 +43,10 @@ class Colaboradores extends Component {
         })
     }
 
+    formatMoney(number) {
+        return parseInt(number).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+    }
+
     render() {
         return (
             <div>
@@ -63,7 +67,7 @@ class Colaboradores extends Component {
                                     <TableCell align="center">{row.nome}</TableCell>
                                     <TableCell align="center">{row.matricula}</TableCell>
                                     <TableCell align="center">{row.email}</TableCell>
-                                    <TableCell align="center">{row.gastos}</TableCell>
+                                    <TableCell align="center">{this.formatMoney(row.gastos)}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -83,9 +87,9 @@ class Colaboradores extends Component {
                         </TableHead>
                         <TableBody>
                                 <TableRow>
-                                    <TableCell align="center">{this.state.totalRecursos.sala}</TableCell>
-                                    <TableCell align="center">{this.state.totalRecursos.equipamento}</TableCell>
-                                    <TableCell align="center">{this.state.totalRecursos.mobilia}</TableCell>
+                                    <TableCell align="center">{this.formatMoney(this.state.totalRecursos.sala)}</TableCell>
+                                    <TableCell align="center">{this.formatMoney(this.state.totalRecursos.equipamento)}</TableCell>
+                                    <TableCell align="center">{this.formatMoney(this.state.totalRecursos.mobilia)}</TableCell>
                                 </TableRow>
                         </TableBody>
                     </Table>

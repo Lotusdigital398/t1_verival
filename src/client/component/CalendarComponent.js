@@ -43,10 +43,20 @@ class CalendarComponent extends Component {
         })
     }
 
+    max(list){
+        let max = list[0] ? list[0] : 0
+        for (const [value] of list.entries()) {
+            if (parseInt(value) > max) {
+                max = parseInt(value)
+            }
+        }
+        return max;
+    }
+
     newEvent(event) {
         let idList = this.state.events.map(a => a.id)
-        let newId = Math.max(idList) + 1
-        var msg = event.recurso === 'sala' ? "Quantidade de Assentos: " : "Quantidade: "
+        let newId = this.max(idList) + 1
+        const msg = event.recurso === 'sala' ? "Quantidade de Assentos: " : "Quantidade: ";
         let tipo = event.tipo.charAt(0).toUpperCase() + event.tipo.slice(1)
         let rec = event.recurso.charAt(0).toUpperCase() + event.recurso.slice(1)
         let titulo = "Colaborador: " + event.nome + " (" + event.matricula + ") \nReserva de " +
@@ -57,7 +67,7 @@ class CalendarComponent extends Component {
             id: newId,
             title: titulo,
             start: moment(event.dataInicio, 'DD-MM-YYYY').toDate(),
-            end: moment(event.dataFim, 'DD-MM-YYYY').toDate(),
+            end: moment(event.dataFim, 'DD-MM-YYYY').add(1, 'days').toDate(),
             obj: event
         }
         this.setState({
@@ -78,6 +88,7 @@ class CalendarComponent extends Component {
             if (res === 'true') {
                 this.setState((prevState) => {
                     const events = [...prevState.events]
+                    console.log(events)
                     let idx = 0;
                     for (const [index, value] of events.entries()) {
                         if (value.obj.id === this.state.obj.id) {
