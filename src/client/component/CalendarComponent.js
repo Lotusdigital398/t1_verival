@@ -47,7 +47,7 @@ class CalendarComponent extends Component {
 
     newEvent(event) {
         let idList = this.state.events.map(a => a.id)
-        let newId = Math.max(...idList) + 1
+        let newId = Math.max(idList) + 1
         var msg = event.recurso === 'sala' ? "Quantidade de Assentos: " : "Quantidade: ";
         let tipo = event.tipo.charAt(0).toUpperCase() + event.tipo.slice(1)
         let rec = event.recurso.charAt(0).toUpperCase() + event.recurso.slice(1)
@@ -55,6 +55,7 @@ class CalendarComponent extends Component {
             style: 'currency',
             currency: 'BRL'
         }) + ")";
+        event.id = newId
         let hour = {
             id: newId,
             title: titulo,
@@ -68,7 +69,6 @@ class CalendarComponent extends Component {
     }
 
     onDelete() {
-        console.log(this.state.obj)
         fetch('http://localhost:5000/deleteReserva', {
             method: 'DELETE',
             headers: {
@@ -81,12 +81,21 @@ class CalendarComponent extends Component {
             if (res === 'true') {
                 this.setState((prevState) => {
                     const events = [...prevState.events]
-                    events.splice(this.state.obj.id, 1);
+                    let idx = 0;
+                    console.log(events)
+                    for (const [index, value] of events.entries()) {
+                        if(value.obj.id === this.state.obj.id){
+                            idx = index
+                            break
+                        }
+                    }
+                    events.splice(idx, 1);
                     return {events};
                 });
                 this.setState({modal: !this.state.modal, obj: {}})
+                console.log(res)
             } else {
-                console.log('error: ' + res)
+                console.log('erro')
             }
         })
     }
@@ -114,10 +123,7 @@ class CalendarComponent extends Component {
                         Recurso: {this.state.obj ? this.state.obj.recurso : ''}<br/>
                         Tipo: {this.state.obj ? this.state.obj.tipo : ''}<br/>
                         Quantidade: {this.state.obj ? this.state.obj.quantidade : ''}<br/>
-                        Preço: {this.state.obj && this.state.obj.preco ? this.state.obj.preco.toLocaleString('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL'
-                    }) : ''}
+                        Preço: {this.state.obj && this.state.obj.preco ? this.state.obj.preco.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) : ''}
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.onDelete}>Excluir</Button>{' '}
