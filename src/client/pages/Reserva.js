@@ -31,7 +31,7 @@ class Reserva extends Component {
             diferencaTempo: 1,
             recursos: [],
             tipos: [],
-            quantDisp: '',
+            quantDisp: '0',
             modal: false,
             regexp: /^[0-9\b]+$/
         }
@@ -115,7 +115,7 @@ class Reserva extends Component {
                     matricula: '',
                     tipo: '',
                     quantidade: '',
-                    quantDisp: '',
+                    quantDisp: '0',
                     header: 'Sucesso!',
                     message: 'Sua reserva foi efetuada com sucesso!'
                 })
@@ -165,7 +165,7 @@ class Reserva extends Component {
     }
 
     handleRec(event) {
-        this.setState({recurso: event.target.value, quantDisp: ''})
+        this.setState({recurso: event.target.value, quantDisp: '0'})
         this.setState({tipo: ""})
         this.setState({quantidade: ""})
         this.getTipos(event.target.value)
@@ -242,6 +242,7 @@ class Reserva extends Component {
                     <Grid>
                         <h3 align="center" style={{color: 'white'}}>Preço da Reserva:</h3>
                         <h3 align="center" style={{color: 'green'}}>{this.formatMoney(this.state.precoTotal)}</h3>
+                        <h3 align="center" style={{color: 'white'}}>Quantidade disponível:</h3>
                         <h3 align="center" style={{color: 'purple'}}>{this.state.quantDisp}</h3>
 
                         <KeyboardDatePicker
