@@ -1,6 +1,11 @@
 import React, {Component} from "react";
-import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
-import {Calendar} from "react-big-calendar";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 
 class Colaboradores extends Component {
@@ -29,11 +34,40 @@ class Colaboradores extends Component {
         })
     }
 
+
+    createData(nome, matricula, email) {
+        return {nome, matricula, email};
+    }
+
+
     render() {
+
+        /*  const rows = [
+              this.createData(this.colaboradores.nome, this.colaboradores.matricula, this.colaboradores.email),
+
+          ];*/
+
         return (
-            <div>
-               <h3>LISTA DE COLABORADORES: </h3>
-            </div>
+            <TableContainer component={Paper}>
+                <Table aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell align="center">Nome do Contribuinte</TableCell>
+                            <TableCell align="center">Matrícula</TableCell>
+                            <TableCell align="center">E-Mail</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {this.state.colaboradores.map((row) => (
+                            <TableRow>
+                                <TableCell align="center">{row.nome}</TableCell>
+                                <TableCell align="center">{row.matricula}</TableCell>
+                                <TableCell align="center">{row.email}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         );
     }
 
