@@ -46,6 +46,7 @@ class Colaboradores extends Component {
     render() {
         return (
             <div>
+                <h2 align="center" style={{color: 'white'}}>Contribuintes:</h2>
                 <TableContainer component={Paper}>
                     <Table aria-label="simple table">
                         <TableHead>
@@ -67,11 +68,29 @@ class Colaboradores extends Component {
                             ))}
                         </TableBody>
                     </Table>
-                </TableContainer>
+                </TableContainer>,
+
                 <h2 align="center" style={{color: 'white'}}>Total de gastos:</h2>
-                <h4 align="center" style={{color: 'white'}}>Salas: {this.state.totalRecursos.sala}</h4>
-                <h4 align="center" style={{color: 'white'}}>Equipamentos: {this.state.totalRecursos.equipamento}</h4>
-                <h4 align="center" style={{color: 'white'}}>Mobilias: {this.state.totalRecursos.mobilia}</h4>
+
+                <TableContainer component={Paper}>
+                    <Table aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="center">Salas</TableCell>
+                                <TableCell align="center">Equipamento</TableCell>
+                                <TableCell align="center">Mobilias</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                                <TableRow>
+                                    <TableCell align="center">{this.state.totalRecursos.sala}</TableCell>
+                                    <TableCell align="center">{this.state.totalRecursos.equipamento}</TableCell>
+                                    <TableCell align="center">{this.state.totalRecursos.mobilia}</TableCell>
+                                </TableRow>
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+
             </div>
         )
     }
