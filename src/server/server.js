@@ -20,6 +20,20 @@ app.get('/getColaboradores', function (req, res) {
     res.send(database.colaboradores)
 })
 
+app.post('/setPreco', function (req, res) {
+    if (req.body.recurso === 'sala') {
+        database[req.body.tipo] = req.body.preco
+    } else {
+        database[req.body.recurso].forEach((item) => {
+            if(req.body.tipo === item.tipo){
+                item.preco = req.body.preco
+            }
+        })
+    }
+    fs.writeFileSync('./src/server/database.json', JSON.stringify(database));
+    res.send('true')
+})
+
 app.get('/getQuantidade', function (req, res) {
     const listDatas = [];
     const dataF = moment(req.query.dataF, 'llll').format('DD-MM-YYYY');
