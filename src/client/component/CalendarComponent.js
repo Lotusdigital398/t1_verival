@@ -105,7 +105,12 @@ class CalendarComponent extends Component {
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
                     <ModalBody>
-                        {this.state.title}
+                        Nome: {this.state.obj ? this.state.obj.nome : ''}<br/>
+                        Matricula: {this.state.obj ? this.state.obj.matricula : ''}<br/>
+                        Recurso: {this.state.obj ? this.state.obj.recurso : ''}<br/>
+                        Tipo: {this.state.obj ? this.state.obj.tipo : ''}<br/>
+                        Quantidade: {this.state.obj ? this.state.obj.quantidade : ''}<br/>
+                        Preço: {this.state.obj && this.state.obj.preco ? this.state.obj.preco.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) : ''}
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.onDelete}>Excluir</Button>{' '}
