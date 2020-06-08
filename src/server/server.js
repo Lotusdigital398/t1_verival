@@ -17,11 +17,21 @@ app.get('/getColaboradores', function (req, res) {
     res.send(database.colaboradores)
 })
 
+app.get('/somaRecurso', function (req, res) {
+    let total = 0
+    database[req.query.recurso].forEach((item) => {
+        item.reservas.forEach((res) => {
+            total += res.preco
+        })
+    })
+    res.send(total + '')
+})
+
 app.get('/custoColaborador', function (req, res) {
     let total = 0
     database.sala.forEach((sala) => {
         sala.reservas.forEach((item) => {
-            if(item.matricula === req.query.matricula){
+            if (item.matricula === req.query.matricula) {
                 total += item.preco
             }
         })
@@ -29,7 +39,7 @@ app.get('/custoColaborador', function (req, res) {
 
     database.mobilia.forEach((mobilia) => {
         mobilia.reservas.forEach((item) => {
-            if(item.matricula === req.query.matricula){
+            if (item.matricula === req.query.matricula) {
                 total += item.preco
             }
         })
@@ -37,12 +47,12 @@ app.get('/custoColaborador', function (req, res) {
 
     database.equipamento.forEach((equip) => {
         equip.reservas.forEach((item) => {
-            if(item.matricula === req.query.matricula){
+            if (item.matricula === req.query.matricula) {
                 total += item.preco
             }
         })
     })
-    res.send(total+'')
+    res.send(total + '')
 })
 
 app.delete('/deleteReserva', function (req, res) {
@@ -51,10 +61,10 @@ app.delete('/deleteReserva', function (req, res) {
     console.log(req.body.recurso)
     let db = database
     db[obj.recurso].forEach((rec) => {
-        if(rec.tipo === obj.tipo){
+        if (rec.tipo === obj.tipo) {
             rec.reservas.forEach((item) => {
-                if(item.matricula === obj.matricula && item.dataFim === obj.dataFim &&
-                    item.dataInicio === obj.dataInicio &&  item.preco === obj.preco && item.quantidade === obj.quantidade){
+                if (item.matricula === obj.matricula && item.dataFim === obj.dataFim &&
+                    item.dataInicio === obj.dataInicio && item.preco === obj.preco && item.quantidade === obj.quantidade) {
                     var index = rec.reservas.indexOf(item);
                     if (index > -1) {
                         rec.reservas.splice(index, 1);
@@ -98,9 +108,9 @@ app.get('/getReservas', function (req, res) {
     res.send(listRecursos)
 })
 
-function getNome(matricula){
+function getNome(matricula) {
     for (let col of database.colaboradores) {
-        if(col.matricula === matricula){
+        if (col.matricula === matricula) {
             return col.nome
         }
     }
