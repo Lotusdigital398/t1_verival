@@ -197,6 +197,13 @@ function getNome(matricula) {
     }
 }
 
+app.get('/getPrecoGlobal', function (req, res) {
+    const obj = {}
+    obj.assento = database.assento
+    obj.m2 = database.m2
+    res.send(obj)
+})
+
 app.get('/getTipos', function (req, res) {
     var list = []
     if (database[req.query.recurso]) {
