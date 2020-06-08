@@ -3,25 +3,17 @@ import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import './css/Reserva.css'
-
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
-
 import {createMuiTheme} from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/styles";
-
 import DateFnsUtils from '@date-io/date-fns';
-import {
-    MuiPickersUtilsProvider,
-    KeyboardDatePicker,
-
-} from '@material-ui/pickers';
-
+import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
+import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 
 class Reserva extends Component {
 
@@ -39,8 +31,10 @@ class Reserva extends Component {
             diferencaTempo: 1,
             recursos: [],
             tipos: [],
+            modal: false,
             regexp: /^[0-9\b]+$/
         }
+
         this.handleDataI = this.handleDataI.bind(this)
         this.handleDataF = this.handleDataF.bind(this)
         this.handleRec = this.handleRec.bind(this)
@@ -49,8 +43,8 @@ class Reserva extends Component {
         this.handleQuant = this.handleQuant.bind(this)
         this.setReserva = this.setReserva.bind(this)
         this.calculaPreco = this.calculaPreco.bind(this)
+        this.toggle = this.toggle.bind(this)
     }
-
 
     componentDidMount() {
         this.getRecursos();
@@ -100,13 +94,26 @@ class Reserva extends Component {
             })
         }).then(res => res.text()).then(res => {
             if (res === "true") {
-                window.alert("Sua reserva foi efetuada com sucesso!")
+                this.setState({
+                    dataI: new Date(),
+                    dataF: new Date(),
+                    recurso: '',
+                    matricula: '',
+                    tipo: '',
+                    quantidade: '',
+                    header: 'Sucesso!',
+                    message: 'Sua reserva foi efetuada com sucesso!'
+                })
+                this.toggle()
             } else {
-                window.alert("Erro: " + res)
+                this.setState({
+                    header: 'Erro!',
+                    message: res
+                })
+                this.toggle()
             }
         })
     }
-
 
     handleDataI(event) {
         this.setState({dataI: event})
@@ -127,7 +134,6 @@ class Reserva extends Component {
     }
 
     handleDataF(event) {
-        console.log(event)
         this.setState({dataF: event})
         const dif = Math.ceil((event.getTime() - this.state.dataI.getTime()) / (86400000)) + 1;
         this.setState({diferencaTempo: dif});
@@ -144,7 +150,6 @@ class Reserva extends Component {
         this.setState({quantidade: ""})
         this.getTipos(event.target.value)
         if (event.target.value === "mobilia" && this.state.dataF.getTime() < (this.state.dataI.getTime() + 4 * 86400000)) {
-            console.log(this.state.dataF)
             this.state.dataF.setTime(this.state.dataI.getTime() + 4 * 86400000)
         }
     }
@@ -152,7 +157,6 @@ class Reserva extends Component {
     handleTipo(event) {
         this.setState({tipo: event.target.value})
         this.calculaPreco(event.target.value);
-        console.log(event.target.value)
     }
 
 
@@ -172,9 +176,9 @@ class Reserva extends Component {
     }
 
     calculaPreco(event, quant, dif) {
-        var quantidade = quant ? quant : this.state.quantidade
-        var diferenca = dif ? dif : this.state.diferencaTempo
-        var aux = 0;
+        const quantidade = quant ? quant : this.state.quantidade;
+        const diferenca = dif ? dif : this.state.diferencaTempo;
+        let aux = 0;
         this.state.tipos.every(function (element, index) {
             if (element.tipo === event) {
                 aux = index;
@@ -192,20 +196,32 @@ class Reserva extends Component {
         }
     }
 
+    toggle() {
+        this.setState({modal: !this.state.modal});
+    }
+
     render() {
         const theme = createMuiTheme({
-            palette: {
-                type: "dark"
-            }
+            palette: {type: "dark"}
         });
 
-        const today = new Date();
         return (
             <ThemeProvider theme={theme}>
+
+                <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                    <ModalHeader toggle={this.toggle}>{this.state.header}</ModalHeader>
+                    <ModalBody>
+                        {this.state.message}
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="secondary" onClick={this.toggle}>Fechar</Button>
+                    </ModalFooter>
+                </Modal>
+
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <Grid>
-                        <h3>Preço da Reserva:</h3>
-                        <h3>{this.formatMoney(this.state.precoTotal)}</h3>
+                        <h3 align="center" style={{color: 'white'}}>Preço da Reserva:</h3>
+                        <h3 align="center" style={{color: 'green'}}>{this.formatMoney(this.state.precoTotal)}</h3>
 
                         <KeyboardDatePicker
                             className="drop1"
@@ -215,10 +231,11 @@ class Reserva extends Component {
                             margin="normal"
                             id="dataIId"
                             label="Data inicial"
-                            minDate={today}
+                            minDate={new Date()}
                             value={this.state.dataI}
                             onChange={this.handleDataI}
                         />
+
                         {this.state.recurso === "mobilia" ?
                             <KeyboardDatePicker
                                 className="drop2"
@@ -246,6 +263,7 @@ class Reserva extends Component {
                                 onChange={this.handleDataF}
                             />
                         }
+
                         <form className="matricula">
                             <TextField
                                 id="matricula-Id"
@@ -257,6 +275,7 @@ class Reserva extends Component {
 
                             />
                         </form>
+
                         <div>
                             <FormControl className="recursos" variant="outlined">
                                 <InputLabel id="demo-simple-select-outlined-label">Recurso</InputLabel>
@@ -278,6 +297,7 @@ class Reserva extends Component {
                                 </Select>
                             </FormControl>
                         </div>
+
                         <div>
                             <FormControl className="tipo" variant="outlined">
                                 {this.state.recurso === "sala" ?
@@ -303,6 +323,7 @@ class Reserva extends Component {
                                 </Select>
                             </FormControl>
                         </div>
+
                         {this.state.recurso !== "sala" ?
                             <form className="quantidade">
                                 <TextField
@@ -324,6 +345,7 @@ class Reserva extends Component {
                                 />
                             </form>
                         }
+
                         <Button
                             className="bReserva"
                             variant="contained"
@@ -337,7 +359,6 @@ class Reserva extends Component {
                 </MuiPickersUtilsProvider>
             </ThemeProvider>
         );
-
     }
 }
 

@@ -1,13 +1,12 @@
 const express = require('express');
 const app = express();
-var cors = require('cors');
+const cors = require('cors');
 app.use(cors());
 var bodyParser = require('body-parser')
 app.use(bodyParser.json())
 const fs = require('fs');
 const database = require('./database.json')
 const moment = require('moment')
-
 
 app.get('/getRecursos', function (req, res) {
     res.send(["sala", "mobilia", "equipamento"])
@@ -21,14 +20,30 @@ app.get('/getColaboradores', function (req, res) {
     res.send(database.colaboradores)
 })
 
-app.get('/somaRecurso', function (req, res) {
+app.get('/somaRecursos', function (req, res) {
     let total = 0
-    database[req.query.recurso].forEach((item) => {
+    let obj = {}
+    database.sala.forEach((item) => {
         item.reservas.forEach((res) => {
             total += res.preco
         })
     })
-    res.send(total + '')
+    obj.sala = total
+    total = 0
+    database.equipamento.forEach((item) => {
+        item.reservas.forEach((res) => {
+            total += res.preco
+        })
+    })
+    obj.equipamento = total
+    total = 0
+    database.mobilia.forEach((item) => {
+        item.reservas.forEach((res) => {
+            total += res.preco
+        })
+    })
+    obj.mobilia = total
+    res.send(obj)
 })
 
 function custoColaborador(matricula) {
@@ -61,8 +76,6 @@ function custoColaborador(matricula) {
 
 app.delete('/deleteReserva', function (req, res) {
     let obj = req.body.obj
-    console.log(obj)
-    console.log(req.body.recurso)
     let db = database
     db[obj.recurso].forEach((rec) => {
         if (rec.tipo === obj.tipo) {
@@ -144,7 +157,8 @@ app.get('/getTipos', function (req, res) {
 })
 
 app.post('/setReserva', function (req, res) {
-    if (req.body.recurso === '' || req.body.tipo === '' || req.body.matricula === '' || req.body.preco === '' || req.body.quantidade === '' || (req.body.quantidade === '0' && req.body.recurso !== 'sala')) {
+    if (req.body.recurso === '' || req.body.tipo === '' || req.body.matricula === '' || req.body.preco === '' ||
+        req.body.quantidade === '' || (req.body.quantidade === '0' && req.body.recurso !== 'sala')) {
         res.send('Dados incompletos!')
     } else {
         let matriculaVal = false;
@@ -164,11 +178,11 @@ app.post('/setReserva', function (req, res) {
 function isDisponivel(req) {
     const recurso = req.body.recurso
     const tipo = req.body.tipo
-    var listDatas = []
-    var dataF = moment(req.body.dataF, 'YYYY-MM-DD').format('DD-MM-YYYY')
-    var dataI = moment(req.body.dataI, 'YYYY-MM-DD').format('DD-MM-YYYY')
-    var data = moment(req.body.dataI, 'YYYY-MM-DD')
-    var db = database
+    const listDatas = [];
+    const dataF = moment(req.body.dataF, 'YYYY-MM-DD').format('DD-MM-YYYY');
+    const dataI = moment(req.body.dataI, 'YYYY-MM-DD').format('DD-MM-YYYY');
+    let data = moment(req.body.dataI, 'YYYY-MM-DD');
+    const db = database;
     //cria lista com todas as datas em que estara alugado
     while (data.format('DD-MM-YYYY') !== dataF) {
         listDatas.push(data.format('DD-MM-YYYY'))
@@ -176,8 +190,7 @@ function isDisponivel(req) {
     }
     listDatas.push(data.format('DD-MM-YYYY'))
 
-    //trata sala diferente de equipamento e mobilia
-    var disponivel = 'true'
+    let disponivel = 'true'
     if (recurso === 'sala') {
         db.sala.forEach((item) => {
             if (item.tipo === tipo) {
@@ -205,7 +218,7 @@ function isDisponivel(req) {
         db[recurso].forEach((item) => {
             if (item.tipo === tipo) {
                 listDatas.forEach((data) => {
-                    var somaItens = 0
+                    let somaItens = 0;
                     item.reservas.forEach((reservas) => {
                         if (moment(data, 'DD-MM-YYYY').isBetween(moment(reservas.dataInicio, 'DD-MM-YYYY'),
                             moment(reservas.dataFim, 'DD-MM-YYYY'), undefined, '[]')) {
@@ -229,14 +242,8 @@ function isDisponivel(req) {
             }
         })
     }
-    console.log(disponivel)
     return disponivel
 }
-
-moment.createFromInputFallback = function (config) {
-    // unreliable string magic, or
-    config._d = new Date(config._i);
-};
 
 const port = 5000;
 app.listen(port, () => `Server running on port ${port}`);

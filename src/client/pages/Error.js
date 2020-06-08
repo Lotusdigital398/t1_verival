@@ -4,7 +4,9 @@ import React from 'react';
 const Error = () => {
     return (
         <div>
-            <p>Bah, mas tu foi longe, não existe nada aqui</p>
+            <h1 style={{color: 'red'}}>404</h1>
+            <br/>
+            <h1 align={'center'} style={{color: 'grey'}}>Bah, mas tu foi longe, não existe nada aqui!</h1>
         </div>
     );
 };

@@ -5,10 +5,10 @@ import App from './client/pages/App';
 import * as serviceWorker from './client/pages/serviceWorker';
 
 ReactDOM.render(
-  <React.Fragment>
-    <App />
-  </React.Fragment>,
-  document.getElementById('root')
+    <React.Fragment>
+        <App/>
+    </React.Fragment>,
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

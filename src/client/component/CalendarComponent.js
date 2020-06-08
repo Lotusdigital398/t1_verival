@@ -4,12 +4,10 @@ import moment from "moment";
 import './css/Calendar.css'
 import './css/Modal.css'
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
-// Instanciacao do localizer, library que gerencia o tempo
+
 const localizer = momentLocalizer(moment);
 
-// Instanciacao padrao de um calendario da library BigCalendar
 class CalendarComponent extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -48,13 +46,12 @@ class CalendarComponent extends Component {
     newEvent(event) {
         let idList = this.state.events.map(a => a.id)
         let newId = Math.max(idList) + 1
-        var msg = event.recurso === 'sala' ? "Quantidade de Assentos: " : "Quantidade: ";
+        var msg = event.recurso === 'sala' ? "Quantidade de Assentos: " : "Quantidade: "
         let tipo = event.tipo.charAt(0).toUpperCase() + event.tipo.slice(1)
         let rec = event.recurso.charAt(0).toUpperCase() + event.recurso.slice(1)
-        let titulo = "Colaborador: " + event.nome + " (" + event.matricula + ") " + "\nReserva de " + rec + ": " + tipo + " " + msg + event.quantidade + " (" + parseInt(event.preco).toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        }) + ")";
+        let titulo = "Colaborador: " + event.nome + " (" + event.matricula + ") \nReserva de " +
+            rec + ": " + tipo + " " + msg + event.quantidade + " (" +
+            parseInt(event.preco).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) + ")";
         event.id = newId
         let hour = {
             id: newId,
@@ -82,7 +79,6 @@ class CalendarComponent extends Component {
                 this.setState((prevState) => {
                     const events = [...prevState.events]
                     let idx = 0;
-                    console.log(events)
                     for (const [index, value] of events.entries()) {
                         if (value.obj.id === this.state.obj.id) {
                             idx = index
@@ -93,7 +89,6 @@ class CalendarComponent extends Component {
                     return {events};
                 });
                 this.setState({modal: !this.state.modal, obj: {}})
-                console.log(res)
             } else {
                 console.log('erro')
             }
@@ -106,7 +101,7 @@ class CalendarComponent extends Component {
 
     toggle(event) {
         this.setState({
-            obj: this.state.modal ? this.state.obj :event.obj,
+            obj: this.state.modal ? this.state.obj : event.obj,
             modal: !this.state.modal,
             title: event.title
         });
@@ -116,9 +111,8 @@ class CalendarComponent extends Component {
         return (
             <div className="Calendar">
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Detalhes da reserva</ModalHeader>
                     <ModalBody style={{textTransform: 'capitalize'}}>
-
                         Nome: {this.state.obj ? this.state.obj.nome : ''}<br/>
                         Matricula: {this.state.obj ? this.state.obj.matricula : ''}<br/>
                         Recurso: {this.state.obj ? this.state.obj.recurso : ''}<br/>
@@ -132,9 +126,10 @@ class CalendarComponent extends Component {
                     <ModalFooter>
                         {this.state.obj && moment().isAfter(moment(this.state.obj.dataInicio, 'DD-MM-YYYY')) ? <br/> :
                             <Button color="primary" onClick={this.onDelete}>Excluir</Button>}
-                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                        <Button color="secondary" onClick={this.toggle}>Fechar</Button>
                     </ModalFooter>
                 </Modal>
+
                 <Calendar
                     views={['month', 'agenda']}
                     localizer={localizer}

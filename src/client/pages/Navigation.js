@@ -2,15 +2,10 @@ import React from "react";
 import {NavLink} from 'react-router-dom';
 import './css/Navigation.css'
 
-
 // Botoes "globais" da aplicacao, podendo ser vistos em todas as paginas
 const Navigation = () => {
-
     return (
         <nav>
-
-
-
             <NavLink className="navList" to="/">
                 <h3>Home</h3>
             </NavLink>
@@ -24,14 +19,10 @@ const Navigation = () => {
             </NavLink>
 
             <NavLink className="navList" to="/calendar">
-                <h3>Calendar</h3>
+                <h3>Calendário</h3>
             </NavLink>
-
-
-
         </nav>
-
-    );
-};
+    )
+}
 
 export default Navigation;

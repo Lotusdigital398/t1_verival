@@ -4,7 +4,8 @@ import React from "react";
 const Home = () => {
     return (
         <div>
-            <p>PELO AMOR DE DEUS FUNCIONA</p>
+            <br/>
+            <h1 align={'center'} style={{color: 'white'}}>Faça aqui as reservas!</h1>
         </div>
     );
 };
