@@ -78,8 +78,13 @@ class CalendarComponent extends Component {
             })
         }).then(res => res.text()).then(res => {
             if (res === 'true') {
-                this.getReservas();
-                this.setState({modal: !this.state.modal})
+                this.setState((prevState) => {
+                    const events = [...prevState.events]
+                    const idx = events.indexOf(this.state.obj)
+                    events.splice(idx, 1);
+                    return {events};
+                });
+                this.setState({modal: !this.state.modal, obj: {}})
                 console.log(res)
             } else {
                 console.log('erro')
