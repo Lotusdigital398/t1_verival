@@ -66,7 +66,7 @@ function custoColaborador(matricula) {
 
     database.equipamento.forEach((equip) => {
         equip.reservas.forEach((item) => {
-            if (item.matricula === req.query.matricula) {
+            if (item.matricula === matricula) {
                 total += item.preco
             }
         })
