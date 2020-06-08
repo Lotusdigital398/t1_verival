@@ -17,6 +17,34 @@ app.get('/getColaboradores', function (req, res) {
     res.send(database.colaboradores)
 })
 
+app.get('/custoColaborador', function (req, res) {
+    let total = 0
+    database.sala.forEach((sala) => {
+        sala.reservas.forEach((item) => {
+            if(item.matricula === req.query.matricula){
+                total += item.preco
+            }
+        })
+    })
+
+    database.mobilia.forEach((mobilia) => {
+        mobilia.reservas.forEach((item) => {
+            if(item.matricula === req.query.matricula){
+                total += item.preco
+            }
+        })
+    })
+
+    database.equipamento.forEach((equip) => {
+        equip.reservas.forEach((item) => {
+            if(item.matricula === req.query.matricula){
+                total += item.preco
+            }
+        })
+    })
+    res.send(total+'')
+})
+
 app.delete('/deleteReserva', function (req, res) {
     let obj = req.body.obj
     console.log(obj)
