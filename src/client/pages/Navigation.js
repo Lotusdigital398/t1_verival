@@ -15,6 +15,10 @@ const Navigation = () => {
                 <h3>Home</h3>
             </NavLink>
 
+            <NavLink className="navList" to="/colaboradores">
+                <h3>Colaboradores</h3>
+            </NavLink>
+
             <NavLink className="navList" to="/reserva">
                 <h3>Reserva</h3>
             </NavLink>
