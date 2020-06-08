@@ -55,6 +55,7 @@ class Colaboradores extends Component {
                             <TableCell align="center">Nome do Contribuinte</TableCell>
                             <TableCell align="center">Matrícula</TableCell>
                             <TableCell align="center">E-Mail</TableCell>
+                            <TableCell align="center">Gastos</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -63,6 +64,7 @@ class Colaboradores extends Component {
                                 <TableCell align="center">{row.nome}</TableCell>
                                 <TableCell align="center">{row.matricula}</TableCell>
                                 <TableCell align="center">{row.email}</TableCell>
+                                <TableCell align="center">{row.gastos}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
