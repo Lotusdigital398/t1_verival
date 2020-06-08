@@ -79,7 +79,7 @@ class Reserva extends Component {
     }
 
     getQuantidade(t, i, f) {
-        console.log(f)
+        console.log(this.state.dataF.getTime())
         fetch(`http://localhost:5000/getQuantidade?recurso=${this.state.recurso}&tipo=${t ? t : this.state.tipo}&dataI=${i ? i : this.state.dataI}&dataF=${f ? new Date(f.getTime()) : this.state.dataF}`, {
             method: 'GET',
             headers: {
@@ -91,6 +91,7 @@ class Reserva extends Component {
     }
 
     setReserva() {
+        console.log('aaaaaaaaaaaaaaaaaaa'+this.state.dataF)
         fetch('http://localhost:5000/setReserva', {
             method: 'POST',
             headers: {
@@ -114,6 +115,7 @@ class Reserva extends Component {
                     matricula: '',
                     tipo: '',
                     quantidade: '',
+                    quantDisp: '',
                     header: 'Sucesso!',
                     message: 'Sua reserva foi efetuada com sucesso!'
                 })

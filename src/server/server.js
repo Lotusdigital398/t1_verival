@@ -21,18 +21,14 @@ app.get('/getColaboradores', function (req, res) {
 })
 
 app.get('/getQuantidade', function (req, res) {
-
     const listDatas = [];
-    const dataF = moment(req.query.dataF, 'YYYY-MM-DD').format('DD-MM-YYYY');
-    console.log(req.query.dataF)
-    console.log(dataF)
-    let data = moment(req.query.dataI, 'YYYY-MM-DD');
+    const dataF = moment(req.query.dataF, 'llll').format('DD-MM-YYYY');
+    let data = moment(req.query.dataI, 'llll')
     while (data.format('DD-MM-YYYY') !== dataF) {
         listDatas.push(data.format('DD-MM-YYYY'))
         data = data.add(1, 'days');
     }
     listDatas.push(data.format('DD-MM-YYYY'))
-    console.log(listDatas)
     let ver = 0
 
     if (req.query.recurso === 'sala') {
@@ -53,11 +49,9 @@ app.get('/getQuantidade', function (req, res) {
         database[req.query.recurso].forEach((item) => {
             if (item.tipo === req.query.tipo) {
                 ver = parseInt(item.quantidade)
-                console.log(item.quantidade)
                 listDatas.forEach((data) => {
                     let somaItens = 0;
                     item.reservas.forEach((reservas) => {
-                        console.log(moment(data, 'DD-MM-YYYY'))
                         if (moment(data, 'DD-MM-YYYY').isBetween(moment(reservas.dataInicio, 'DD-MM-YYYY'),
                             moment(reservas.dataFim, 'DD-MM-YYYY'), undefined, '[]')) {
                             somaItens += parseInt(reservas.quantidade)
@@ -210,7 +204,7 @@ app.get('/getTipos', function (req, res) {
 })
 
 app.post('/setReserva', function (req, res) {
-    console.log(req.body.dataI)
+    console.log('setReserva req dataf: ' + req.body.dataF)
     if (req.body.recurso === '' || req.body.tipo === '' || req.body.matricula === '' || req.body.preco === '' ||
         req.body.quantidade === '' || (req.body.quantidade === '0' && req.body.recurso !== 'sala')) {
         res.send('Dados incompletos!')
@@ -279,7 +273,8 @@ function isDisponivel(req) {
                             somaItens += parseInt(reservas.quantidade)
                         }
                     })
-                    if (somaItens + parseInt(req.body.quantidade) > item.totais) {
+                    console.log(parseInt(req.body.quantidade))
+                    if (somaItens + parseInt(req.body.quantidade) > parseInt(item.quantidade)) {
                         disponivel = 'Quantidade de ' + recurso + ' não disponível na data selecionada!'
                     }
                 })
