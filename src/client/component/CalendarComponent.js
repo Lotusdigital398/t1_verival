@@ -63,7 +63,7 @@ class CalendarComponent extends Component {
             obj: event
         }
         this.setState({
-            events: this.state.events.concat([hour]),
+            events: this.state.events.concat([hour])
         })
     }
 
@@ -79,6 +79,7 @@ class CalendarComponent extends Component {
         }).then(res => res.text()).then(res => {
             if (res === 'true') {
                 this.getReservas();
+                this.setState({modal: !this.state.modal})
                 console.log(res)
             } else {
                 console.log('erro')
