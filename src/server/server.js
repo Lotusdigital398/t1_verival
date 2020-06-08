@@ -14,6 +14,10 @@ app.get('/getRecursos', function (req, res) {
 })
 
 app.get('/getColaboradores', function (req, res) {
+    let db = database.colaboradores
+    db.forEach((col) => {
+        col.gastos = custoColaborador(col.matricula)
+    })
     res.send(database.colaboradores)
 })
 
@@ -27,11 +31,11 @@ app.get('/somaRecurso', function (req, res) {
     res.send(total + '')
 })
 
-app.get('/custoColaborador', function (req, res) {
+function custoColaborador(matricula) {
     let total = 0
     database.sala.forEach((sala) => {
         sala.reservas.forEach((item) => {
-            if (item.matricula === req.query.matricula) {
+            if (item.matricula === matricula) {
                 total += item.preco
             }
         })
@@ -39,7 +43,7 @@ app.get('/custoColaborador', function (req, res) {
 
     database.mobilia.forEach((mobilia) => {
         mobilia.reservas.forEach((item) => {
-            if (item.matricula === req.query.matricula) {
+            if (item.matricula === matricula) {
                 total += item.preco
             }
         })
@@ -52,8 +56,8 @@ app.get('/custoColaborador', function (req, res) {
             }
         })
     })
-    res.send(total + '')
-})
+    return total
+}
 
 app.delete('/deleteReserva', function (req, res) {
     let obj = req.body.obj
@@ -140,7 +144,7 @@ app.get('/getTipos', function (req, res) {
 })
 
 app.post('/setReserva', function (req, res) {
-    if (req.body.recurso === '' || req.body.tipo === '' || req.body.matricula === '' || req.body.preco === '' || (req.body.quantidade === '' && req.body.recurso !== 'sala')) {
+    if (req.body.recurso === '' || req.body.tipo === '' || req.body.matricula === '' || req.body.preco === '' || req.body.quantidade === '' || (req.body.quantidade === '0' && req.body.recurso !== 'sala')) {
         res.send('Dados incompletos!')
     } else {
         let matriculaVal = false;

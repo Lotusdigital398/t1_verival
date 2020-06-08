@@ -14,8 +14,6 @@ class Colaboradores extends Component {
         this.state = {
             colaboradores: []
         }
-        //this.handleDataI = this.handleDataI.bind(this)
-
     }
 
 
@@ -34,19 +32,7 @@ class Colaboradores extends Component {
         })
     }
 
-
-    createData(nome, matricula, email) {
-        return {nome, matricula, email};
-    }
-
-
     render() {
-
-        /*  const rows = [
-              this.createData(this.colaboradores.nome, this.colaboradores.matricula, this.colaboradores.email),
-
-          ];*/
-
         return (
             <TableContainer component={Paper}>
                 <Table aria-label="simple table">
@@ -60,7 +46,7 @@ class Colaboradores extends Component {
                     </TableHead>
                     <TableBody>
                         {this.state.colaboradores.map((row) => (
-                            <TableRow>
+                            <TableRow key={row.matricula}>
                                 <TableCell align="center">{row.nome}</TableCell>
                                 <TableCell align="center">{row.matricula}</TableCell>
                                 <TableCell align="center">{row.email}</TableCell>

@@ -48,7 +48,15 @@
     {
       "tipo": "103",
       "m2": "60",
-      "reservas": []
+      "reservas": [
+        {
+          "matricula": "17104156",
+          "dataInicio": "08-06-2020",
+          "dataFim": "08-06-2020",
+          "preco": 1200,
+          "quantidade": "2"
+        }
+      ]
     },
     {
       "tipo": "104",
