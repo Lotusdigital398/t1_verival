@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Calendar, momentLocalizer} from "react-big-calendar";
 import moment from "moment";
 import './css/Calendar.css'
-import Teste from './css/teste'
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 // Instanciacao do localizer, library que gerencia o tempo
 const localizer = momentLocalizer(moment);
 
@@ -13,11 +13,17 @@ class CalendarComponent extends Component {
         super(props);
         this.state = {
             events: [],
-            reservas: {}
-        }
+            reservas: {},
+            modal: false,
+            title: '',
+            obj: {}
+        };
+
+        this.toggle = this.toggle.bind(this);
         this.newEvent = this.newEvent.bind(this)
         this.getReservas = this.getReservas.bind(this)
         this.test = this.test.bind(this)
+        this.onDelete = this.onDelete.bind(this)
     }
 
     componentDidMount() {
@@ -39,7 +45,6 @@ class CalendarComponent extends Component {
     }
 
     newEvent(event) {
-
         let idList = this.state.events.map(a => a.id)
         let newId = Math.max(...idList) + 1
         var msg = event.recurso === 'sala' ? "Quantidade de Assentos: " : "Quantidade: ";
@@ -61,16 +66,51 @@ class CalendarComponent extends Component {
         })
     }
 
+    onDelete() {
+        fetch('http://localhost:5000/deleteReserva', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                obj: this.state.obj
+            })
+        }).then(res => res.text()).then(res => {
+            if (res === 'true') {
+                this.getReservas();
+                console.log(res)
+            } else {
+                console.log('erro')
+            }
+        })
+    }
+
     test(event) {
-        console.log(event.obj)
+        this.toggle(event)
+    }
+
+    toggle(event) {
+        this.setState({
+            modal: !this.state.modal,
+            title: event.title,
+            obj: event.obj
+        });
     }
 
     render() {
         return (
             <div className="Calendar">
-                <Teste/>
+                <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                    <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+                    <ModalBody>
+                        {this.state.title}
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="primary" onClick={this.onDelete}>Excluir</Button>{' '}
+                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                    </ModalFooter>
+                </Modal>
                 <Calendar
-                    popup
                     views={['month', 'agenda']}
                     localizer={localizer}
                     defaultDate={new Date()}

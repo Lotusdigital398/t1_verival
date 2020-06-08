@@ -18,13 +18,15 @@ app.get('/getColaboradores', function (req, res) {
 })
 
 app.delete('/deleteReserva', function (req, res) {
+    let obj = req.body.obj
+    console.log(obj)
     console.log(req.body.recurso)
     let db = database
-    db[req.body.recurso].forEach((rec) => {
-        if(rec.tipo === req.body.tipo){
+    db[obj.recurso].forEach((rec) => {
+        if(rec.tipo === obj.tipo){
             rec.reservas.forEach((item) => {
-                if(item.matricula === req.body.matricula && item.dataFim === req.body.dataFim &&
-                    item.dataInicio === req.body.dataInicio &&  item.preco === req.body.preco && item.quantidade === req.body.quantidade){
+                if(item.matricula === obj.matricula && item.dataFim === obj.dataFim &&
+                    item.dataInicio === obj.dataInicio &&  item.preco === obj.preco && item.quantidade === obj.quantidade){
                     var index = rec.reservas.indexOf(item);
                     if (index > -1) {
                         rec.reservas.splice(index, 1);
