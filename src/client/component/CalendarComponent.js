@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Calendar, momentLocalizer} from "react-big-calendar";
 import moment from "moment";
 import './css/Calendar.css'
-
+import Teste from './css/teste'
 // Instanciacao do localizer, library que gerencia o tempo
 const localizer = momentLocalizer(moment);
 
@@ -68,6 +68,7 @@ class CalendarComponent extends Component {
     render() {
         return (
             <div className="Calendar">
+                <Teste/>
                 <Calendar
                     popup
                     views={['month', 'agenda']}
