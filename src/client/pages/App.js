@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from "./Home";
 import Reserva from "./Reserva";
 import CalendarComponent from "../component/CalendarComponent";
+import Colaboradores from "./Colaboradores";
 import Error from "./Error";
 import Navigation from "./Navigation";
 
@@ -20,6 +21,7 @@ class App extends Component {
                     <Navigation />
                     <Switch>
                         <Route path="/" component={Home} exact />
+                        <Route path="/colaboradores" component={Colaboradores} />
                         <Route path="/calendar" component={CalendarComponent} />
                         <Route path="/reserva" component={Reserva} />
                         <Route component={Error} />

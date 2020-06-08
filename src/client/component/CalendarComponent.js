@@ -117,7 +117,8 @@ class CalendarComponent extends Component {
             <div className="Calendar">
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
-                    <ModalBody>
+                    <ModalBody style={{textTransform: 'capitalize'}}>
+
                         Nome: {this.state.obj ? this.state.obj.nome : ''}<br/>
                         Matricula: {this.state.obj ? this.state.obj.matricula : ''}<br/>
                         Recurso: {this.state.obj ? this.state.obj.recurso : ''}<br/>
