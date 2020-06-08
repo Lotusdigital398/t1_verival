@@ -84,7 +84,7 @@ class CalendarComponent extends Component {
                     let idx = 0;
                     console.log(events)
                     for (const [index, value] of events.entries()) {
-                        if(value.obj.id === this.state.obj.id){
+                        if (value.obj.id === this.state.obj.id) {
                             idx = index
                             break
                         }
@@ -106,9 +106,9 @@ class CalendarComponent extends Component {
 
     toggle(event) {
         this.setState({
+            obj: this.state.modal ? this.state.obj :event.obj,
             modal: !this.state.modal,
-            title: event.title,
-            obj: event.obj
+            title: event.title
         });
     }
 
@@ -123,10 +123,14 @@ class CalendarComponent extends Component {
                         Recurso: {this.state.obj ? this.state.obj.recurso : ''}<br/>
                         Tipo: {this.state.obj ? this.state.obj.tipo : ''}<br/>
                         Quantidade: {this.state.obj ? this.state.obj.quantidade : ''}<br/>
-                        Preço: {this.state.obj && this.state.obj.preco ? this.state.obj.preco.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) : ''}
+                        Preço: {this.state.obj && this.state.obj.preco ? this.state.obj.preco.toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    }) : ''}
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.onDelete}>Excluir</Button>{' '}
+                        {this.state.obj && moment().isAfter(moment(this.state.obj.dataInicio, 'DD-MM-YYYY')) ? <br/> :
+                            <Button color="primary" onClick={this.onDelete}>Excluir</Button>}
                         <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
