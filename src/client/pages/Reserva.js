@@ -170,7 +170,7 @@ class Reserva extends Component {
         this.setState({quantidade: ""})
         this.getTipos(event.target.value)
         if (event.target.value === "mobilia" && this.state.dataF.getTime() < (this.state.dataI.getTime() + 4 * 86400000)) {
-            this.state.dataF.setTime(this.state.dataI.getTime() + 4 * 86400000)
+            this.setState({dataF: new Date(this.state.dataI.getTime() + 4 * 86400000)})
         }
     }
 
