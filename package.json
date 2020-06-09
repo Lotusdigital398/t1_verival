@@ -1,6 +1,6 @@
 {
   "name": "t1-verival",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
