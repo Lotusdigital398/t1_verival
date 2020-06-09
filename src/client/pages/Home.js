@@ -2,6 +2,8 @@ import React from "react";
 import logo from './css/logoPUCRS.png';
 import './css/Home.css';
 
+//Commit 100
+
 // Pagina principal da aplicacao
 const Home = () => {
     return (
