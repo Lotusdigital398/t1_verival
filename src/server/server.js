@@ -46,8 +46,9 @@ app.get('/getQuantidade', function (req, res) {
     const dataF = moment(req.query.dataF, 'llll').format('DD-MM-YYYY');
     let data = moment(req.query.dataI, 'llll')
 
-    if (verData(moment(req.query.dataI, 'llll').format('YYYY-MM-DD'), moment(req.query.dataF, 'llll').format('YYYY-MM-DD'), req.query.recurso) !== '') {
-        res.send('')
+    if (verData(moment(req.query.dataI, 'llll').format('YYYY-MM-DD'), moment(req.query.dataF, 'llll')
+        .format('YYYY-MM-DD'), req.query.recurso) !== '' || req.query.dataI === 'Invalid Date' || req.query.dataF === 'Invalid Date') {
+        res.send('0')
     } else {
 
         while (data.format('DD-MM-YYYY') !== dataF) {
