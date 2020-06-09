@@ -45,47 +45,53 @@ app.get('/getQuantidade', function (req, res) {
     const listDatas = [];
     const dataF = moment(req.query.dataF, 'llll').format('DD-MM-YYYY');
     let data = moment(req.query.dataI, 'llll')
-    while (data.format('DD-MM-YYYY') !== dataF) {
-        listDatas.push(data.format('DD-MM-YYYY'))
-        data = data.add(1, 'days');
-    }
-    listDatas.push(data.format('DD-MM-YYYY'))
-    let ver = 0
 
-    if (req.query.recurso === 'sala') {
-        database.sala.forEach((item) => {
-            if (item.tipo === req.query.tipo) {
-                ver = 1
-                item.reservas.forEach((reservas) => {
-                    listDatas.forEach((data) => {
-                        if (moment(data, 'DD-MM-YYYY').isBetween(moment(reservas.dataInicio, 'DD-MM-YYYY'),
-                            moment(reservas.dataFim, 'DD-MM-YYYY'), undefined, '[]')) {
-                            ver = 0
-                        }
-                    })
-                })
-            }
-        })
+    if (verData(moment(req.query.dataI, 'llll').format('YYYY-MM-DD'), moment(req.query.dataF, 'llll').format('YYYY-MM-DD'), req.query.recurso) !== '') {
+        res.send('')
     } else {
-        database[req.query.recurso].forEach((item) => {
-            if (item.tipo === req.query.tipo) {
-                ver = parseInt(item.quantidade)
-                listDatas.forEach((data) => {
-                    let somaItens = 0;
+
+        while (data.format('DD-MM-YYYY') !== dataF) {
+            listDatas.push(data.format('DD-MM-YYYY'))
+            data = data.add(1, 'days');
+        }
+        listDatas.push(data.format('DD-MM-YYYY'))
+        let ver = 0
+
+        if (req.query.recurso === 'sala') {
+            database.sala.forEach((item) => {
+                if (item.tipo === req.query.tipo) {
+                    ver = 1
                     item.reservas.forEach((reservas) => {
-                        if (moment(data, 'DD-MM-YYYY').isBetween(moment(reservas.dataInicio, 'DD-MM-YYYY'),
-                            moment(reservas.dataFim, 'DD-MM-YYYY'), undefined, '[]')) {
-                            somaItens += parseInt(reservas.quantidade)
+                        listDatas.forEach((data) => {
+                            if (moment(data, 'DD-MM-YYYY').isBetween(moment(reservas.dataInicio, 'DD-MM-YYYY'),
+                                moment(reservas.dataFim, 'DD-MM-YYYY'), undefined, '[]')) {
+                                ver = 0
+                            }
+                        })
+                    })
+                }
+            })
+        } else {
+            database[req.query.recurso].forEach((item) => {
+                if (item.tipo === req.query.tipo) {
+                    ver = parseInt(item.quantidade)
+                    listDatas.forEach((data) => {
+                        let somaItens = 0;
+                        item.reservas.forEach((reservas) => {
+                            if (moment(data, 'DD-MM-YYYY').isBetween(moment(reservas.dataInicio, 'DD-MM-YYYY'),
+                                moment(reservas.dataFim, 'DD-MM-YYYY'), undefined, '[]')) {
+                                somaItens += parseInt(reservas.quantidade)
+                            }
+                        })
+                        if (parseInt(item.quantidade) - somaItens < ver) {
+                            ver = parseInt(item.quantidade) - somaItens
                         }
                     })
-                    if (parseInt(item.quantidade) - somaItens < ver) {
-                        ver = parseInt(item.quantidade) - somaItens
-                    }
-                })
-            }
-        })
+                }
+            })
+        }
+        res.send(ver + '')
     }
-    res.send(ver + '')
 })
 
 app.get('/somaRecursos', function (req, res) {
@@ -267,17 +273,8 @@ function isDisponivel(req) {
     console.log(moment().add(4, 'days'))
     console.log(moment(req.body.dataF, 'YYYY-MM-DD'))
 
-    if (moment().isAfter(moment(req.body.dataI, 'YYYY-MM-DD'), 'day')) {
-        return 'Data inicial inválida!'
-    }
-    if (recurso === 'mobilia') {
-        if (moment().add(4, 'days').isAfter(moment(req.body.dataF, 'YYYY-MM-DD'), 'day')) {
-            return 'Data final inválida!'
-        }
-    } else {
-        if (moment().isAfter(moment(req.body.dataF, 'YYYY-MM-DD'), 'day')) {
-            return 'Data final inválida!'
-        }
+    if (verData(dataI, dataF, recurso) !== '') {
+        return verData(dataI, dataF, recurso)
     }
 
     let data = moment(req.body.dataI, 'YYYY-MM-DD');
@@ -342,6 +339,22 @@ function isDisponivel(req) {
         })
     }
     return disponivel
+}
+
+function verData(dataI, dataF, recurso) {
+    if (moment().isAfter(moment(dataI, 'YYYY-MM-DD'), 'day')) {
+        return 'Data inicial inválida!'
+    }
+    if (recurso === 'mobilia') {
+        if (moment().add(4, 'days').isAfter(moment(dataF, 'YYYY-MM-DD'), 'day')) {
+            return 'Data final inválida!'
+        }
+    } else {
+        if (moment().isAfter(moment(dataF, 'YYYY-MM-DD'), 'day')) {
+            return 'Data final inválida!'
+        }
+    }
+    return ''
 }
 
 const port = 5000;
