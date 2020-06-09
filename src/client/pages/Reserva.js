@@ -27,6 +27,7 @@ class Reserva extends Component {
             tipo: '',
             quantidade: "",
             precoM2: "10",
+            precoAssento: '5',
             precoTotal: 0,
             diferencaTempo: 1,
             recursos: [],
@@ -50,6 +51,19 @@ class Reserva extends Component {
     componentDidMount() {
         this.getRecursos();
         this.getTipos();
+        this.getGlobal();
+    }
+
+    getGlobal() {
+        fetch('http://localhost:5000/getPrecoGlobal', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.text()).then(res => {
+            const obj = JSON.parse(res)
+            this.setState({precoM2: obj.m2, precoAssento: obj.assento})
+        })
     }
 
     getRecursos() {
@@ -210,7 +224,7 @@ class Reserva extends Component {
         })
         if (this.state.tipos[aux]) {
             if (this.state.recurso === "sala") {
-                this.setState({precoTotal: this.state.precoM2 * this.state.tipos[aux].m2 * diferenca * quantidade})
+                this.setState({precoTotal: this.state.precoM2 * this.state.tipos[aux].m2 * diferenca + (quantidade * this.state.precoAssento)})
             } else {
                 this.setState({precoTotal: this.state.tipos[aux].preco * quantidade * diferenca})
             }
