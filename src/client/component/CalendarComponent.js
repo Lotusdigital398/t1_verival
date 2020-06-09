@@ -60,7 +60,7 @@ class CalendarComponent extends Component {
         let tipo = event.tipo.charAt(0).toUpperCase() + event.tipo.slice(1)
         let rec = event.recurso.charAt(0).toUpperCase() + event.recurso.slice(1)
         let titulo = "Colaborador: " + event.nome + " (" + event.matricula + ") \nReserva de " +
-            rec + ": " + tipo + " " + msg + event.quantidade + " (" +
+            (rec === 'Sala' ? 'Espaço físico' : rec) + ": " + tipo + " " + msg + event.quantidade + " (" +
             parseInt(event.preco).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) + ")";
         event.id = newId
         let hour = {
