@@ -142,6 +142,7 @@ class CalendarComponent extends Component {
                 </Modal>
 
                 <Calendar
+                    popup
                     views={['month', 'agenda']}
                     localizer={localizer}
                     defaultDate={new Date()}

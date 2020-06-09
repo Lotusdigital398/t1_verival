@@ -30,6 +30,7 @@ class Reserva extends Component {
             recursos: [],
             tipos: [],
             modal: false,
+            regexp: /^[0-9\b]+$/
         }
 
         this.handlePrecoAtual = this.handlePrecoAtual.bind(this)
@@ -136,7 +137,9 @@ class Reserva extends Component {
     }
 
     handlePreco(event) {
-        this.setState({preco: event.target.value})
+        if (event.target.value === '' || this.state.regexp.test(event.target.value)) {
+            this.setState({preco: event.target.value})
+        }
     }
 
     handlePrecoAtual(event) {

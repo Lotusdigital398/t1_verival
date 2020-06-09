@@ -1,0 +1,44 @@
+.Home {
+    text-align: center;
+}
+
+.Home-logo {
+    width: auto;
+    height: 600px;
+}
+
+.Spin{
+    width: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .Home-logo {
+        animation: Home-logo-spin infinite 20s linear;
+    }
+
+    .Spin{
+        animation: Spin-spin infinite 20s linear;
+    }
+}
+
+.Home-link {
+    color: #61dafb;
+}
+
+@keyframes Spin-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes Home-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
