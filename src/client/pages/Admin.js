@@ -2,7 +2,7 @@ import 'date-fns';
 import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import './css/Reserva.css'
+import './css/Admin.css'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -238,9 +238,8 @@ class Reserva extends Component {
                             </FormControl>
 
                         </div>
-                        <form className="quantidade">
+                        <form className="preco">
                             <TextField
-                                //^^^^^^^^^^^^^^^^^^MUDAR AQUI O CLASSNAME PRA QUANTIDADE CARLOS
                                 id="preco-Id"
                                 label="Preço"
                                 variant="outlined"
