@@ -24,11 +24,15 @@ class Reserva extends Component {
             tipo: '',
             quantidade: "",
             preco: '',
+            precoAtual: '0',
+            precoM2: '',
+            precoAssento: '',
             recursos: [],
             tipos: [],
             modal: false,
         }
 
+        this.handlePrecoAtual = this.handlePrecoAtual.bind(this)
         this.handleRec = this.handleRec.bind(this)
         this.handleTipo = this.handleTipo.bind(this)
         this.handlePreco = this.handlePreco.bind(this)
@@ -40,6 +44,7 @@ class Reserva extends Component {
     componentDidMount() {
         this.getRecursos();
         this.getTipos();
+        this.getGlobal();
 
     }
 
@@ -51,6 +56,18 @@ class Reserva extends Component {
             }
         }).then(res => res.text()).then(res => {
             this.setState({recursos: JSON.parse(res)})
+        })
+    }
+
+    getGlobal() {
+        fetch('http://localhost:5000/getPrecoGlobal', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.text()).then(res => {
+            const obj = JSON.parse(res)
+            this.setState({precoM2: obj.m2, precoAssento: obj.assento})
         })
     }
 
@@ -115,10 +132,31 @@ class Reserva extends Component {
 
     handleTipo(event) {
         this.setState({tipo: event.target.value})
+        this.handlePrecoAtual(event)
     }
 
     handlePreco(event) {
         this.setState({preco: event.target.value})
+    }
+
+    handlePrecoAtual(event) {
+        if (event.target) {
+            if (event.target.value === "m2") {
+                this.setState({precoAtual: this.state.precoM2})
+            } else if (event.target.value === "assento") {
+                this.setState({precoAtual: this.state.precoAssento})
+            } else {
+                this.state.tipos.forEach(item => {
+                    if (item.tipo === event.target.value) {
+                        this.setState({precoAtual: item.preco})
+                    }
+                })
+            }
+        }
+    }
+
+    formatMoney(number) {
+        return parseInt(number).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
     }
 
     toggle() {
@@ -144,6 +182,8 @@ class Reserva extends Component {
 
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <Grid>
+                        <h3 align="center" style={{color: 'white'}}>Preço Atual</h3>
+                        <h3 align="center" style={{color: 'green'}}>{this.formatMoney(this.state.precoAtual)}</h3>
                         <div>
                             <FormControl className="recursos" variant="outlined">
                                 <InputLabel id="demo-simple-select-outlined-label">Recurso</InputLabel>
