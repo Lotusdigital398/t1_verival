@@ -129,6 +129,7 @@ class Reserva extends Component {
                     matricula: '',
                     tipo: '',
                     quantidade: '',
+                    precoTotal: 0,
                     quantDisp: '0',
                     header: 'Sucesso!',
                     message: 'Sua reserva foi efetuada com sucesso!'

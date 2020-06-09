@@ -110,7 +110,7 @@ class Reserva extends Component {
                     tipo: '',
                     preco: '',
                     header: 'Sucesso!',
-                    message: 'Sua reserva foi efetuada com sucesso!'
+                    message: 'Preço alterado com sucesso!'
                 })
                 this.toggle()
             } else {
