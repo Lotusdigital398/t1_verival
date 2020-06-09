@@ -2,7 +2,7 @@ import 'date-fns';
 import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import './css/Reserva.css'
+import './css/Admin.css'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -190,7 +190,7 @@ class Admin extends Component {
                         <h3 align="center" style={{color: 'white'}}>Preço Atual</h3>
                         <h3 align="center" style={{color: 'green'}}>{this.formatMoney(this.state.precoAtual)}</h3>
                         <div>
-                            <FormControl className="recursos" variant="outlined">
+                            <FormControl className="recurso" variant="outlined">
                                 <InputLabel id="demo-simple-select-outlined-label">Recurso</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-outlined-label"
@@ -213,7 +213,7 @@ class Admin extends Component {
 
 
                         <div>
-                            <FormControl className="tipo" variant="outlined">
+                            <FormControl className="tipos" variant="outlined">
                                 {this.state.recurso === "sala" ?
                                     <InputLabel id="demo-simple-select-outlined-label">Número</InputLabel>
                                     :
@@ -240,7 +240,7 @@ class Admin extends Component {
                             </FormControl>
 
                         </div>
-                        <form className="quantidade">
+                        <form className="precos">
                             <TextField
                                 //^^^^^^^^^^^^^^^^^^MUDAR AQUI O CLASSNAME PRA QUANTIDADE CARLOS
                                 id="preco-Id"
@@ -253,7 +253,7 @@ class Admin extends Component {
 
 
                         <Button
-                            className="bReserva"
+                            className="bReservas"
                             variant="contained"
                             size="large"
                             startIcon={<SaveIcon/>}

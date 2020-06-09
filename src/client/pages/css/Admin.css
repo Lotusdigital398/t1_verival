@@ -4,14 +4,14 @@ body{
 }
 
 
-.recursos{
+.recurso{
     position: relative;
     top: 194px;
     width: 200px;
     right: -700px;
 }
 
-.tipo{
+.tipos{
     position: relative;
     top: 138px;
     right: -1000px;
@@ -20,7 +20,7 @@ body{
 }
 
 
-.preco{
+.precos{
     position: relative;
     top: 200px;
     right: -850px;
@@ -28,7 +28,7 @@ body{
 
 }
 
-.bReserva{
+.bReservas{
     position: relative;
     top: 320px;
     right: -890px;
