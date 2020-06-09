@@ -3,4 +3,4 @@
 
 Trabalho entregue no mês de Junho de 2020 para a cadeira de Verificação e Validação de Software na PUCRS.
 
-Acesse a documentação "Aqui":https://github.com/frankemax/t1_verival/wiki
+Acesse a documentação https://github.com/frankemax/t1_verival/wiki
