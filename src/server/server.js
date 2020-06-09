@@ -21,17 +21,21 @@ app.get('/getColaboradores', function (req, res) {
 })
 
 app.post('/setPreco', function (req, res) {
-    if (req.body.recurso === 'sala') {
-        database[req.body.tipo] = req.body.preco
+    if (req.body.recurso === '' || req.body.tipo === '' || req.body.preco === '') {
+        res.send('Dados incompletos!')
     } else {
-        database[req.body.recurso].forEach((item) => {
-            if(req.body.tipo === item.tipo){
-                item.preco = req.body.preco
-            }
-        })
+        if (req.body.recurso === 'sala') {
+            database[req.body.tipo] = req.body.preco
+        } else {
+            database[req.body.recurso].forEach((item) => {
+                if (req.body.tipo === item.tipo) {
+                    item.preco = req.body.preco
+                }
+            })
+        }
+        fs.writeFileSync('./src/server/database.json', JSON.stringify(database));
+        res.send('true')
     }
-    fs.writeFileSync('./src/server/database.json', JSON.stringify(database));
-    res.send('true')
 })
 
 app.get('/getQuantidade', function (req, res) {
