@@ -3,10 +3,10 @@
 
 
 
-# Trabalho 1 de VeriVal
-## T1 VeriVal: Frederico, Gabriel, Schell e Max e o Carlos de Santi
+# Trabalho 1 de VeriVal II
+## T1 VeriVal: Carlos, Frederico, Gabriel Castro, Lucas Schell e Max Franke
 
-Trabalho entregue no mês de Junho de 2020 para a cadeira de Verificação e Validação de Software na PUCRS.
+Trabalho entregue no mês de Junho de 2020 para a cadeira de Verificação e Validação de Software II na PUCRS.
 
 Acesse a documentação https://github.com/frankemax/t1_verival/wiki
 
