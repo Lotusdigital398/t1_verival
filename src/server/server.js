@@ -13,11 +13,14 @@ app.get('/getRecursos', function (req, res) {
 })
 
 app.get('/getColaboradores', function (req, res) {
-    let db = database.colaboradores
-    db.forEach((col) => {
-        col.gastos = custoColaborador(col.matricula)
+    let list = []
+    let i = {}
+    database.colaboradores.forEach((col) => {
+        i = {...col}
+        i.gastos = custoColaborador(col.matricula)
+        list.push(i)
     })
-    res.send(database.colaboradores)
+    res.send(list)
 })
 
 app.post('/setPreco', function (req, res) {
