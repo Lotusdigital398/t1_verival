@@ -2,7 +2,7 @@ import 'date-fns';
 import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import './css/Admin.css'
+import './css/Reserva.css'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -15,7 +15,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import {MuiPickersUtilsProvider} from '@material-ui/pickers';
 import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 
-class Reserva extends Component {
+class Admin extends Component {
 
     constructor(props) {
         super(props);
@@ -240,8 +240,9 @@ class Reserva extends Component {
                             </FormControl>
 
                         </div>
-                        <form className="preco">
+                        <form className="quantidade">
                             <TextField
+                                //^^^^^^^^^^^^^^^^^^MUDAR AQUI O CLASSNAME PRA QUANTIDADE CARLOS
                                 id="preco-Id"
                                 label="Preço"
                                 variant="outlined"
@@ -267,4 +268,4 @@ class Reserva extends Component {
     }
 }
 
-export default Reserva;
+export default Admin;
