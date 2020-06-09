@@ -43,7 +43,7 @@ class CalendarComponent extends Component {
         })
     }
 
-    max(list){
+    max(list) {
         let max = list[0] ? list[0] : 0
         for (const [value] of list.entries()) {
             if (parseInt(value) > max) {
@@ -126,7 +126,7 @@ class CalendarComponent extends Component {
                     <ModalBody style={{textTransform: 'capitalize'}}>
                         Nome: {this.state.obj ? this.state.obj.nome : ''}<br/>
                         Matricula: {this.state.obj ? this.state.obj.matricula : ''}<br/>
-                        Recurso: {this.state.obj ? this.state.obj.recurso : ''}<br/>
+                        Recurso: {this.state.obj ? this.state.obj.recurso === 'sala' ? 'espaço físico' : this.state.obj.recurso : ''}<br/>
                         Tipo: {this.state.obj ? this.state.obj.tipo : ''}<br/>
                         Quantidade: {this.state.obj ? this.state.obj.quantidade : ''}<br/>
                         Preço: {this.state.obj && this.state.obj.preco ? this.state.obj.preco.toLocaleString('pt-BR', {
