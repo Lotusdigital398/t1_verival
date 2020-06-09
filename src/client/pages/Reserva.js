@@ -244,7 +244,7 @@ class Reserva extends Component {
             <ThemeProvider theme={theme}>
 
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>{this.state.header}</ModalHeader>
+                    <ModalHeader>{this.state.header}</ModalHeader>
                     <ModalBody>
                         {this.state.message}
                     </ModalBody>
