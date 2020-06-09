@@ -136,7 +136,7 @@ class CalendarComponent extends Component {
                     </ModalBody>
                     <ModalFooter>
                         {this.state.obj && moment().isAfter(moment(this.state.obj.dataInicio, 'DD-MM-YYYY')) ? <br/> :
-                            <Button color="primary" onClick={this.onDelete}>Excluir</Button>}
+                            <Button color="danger" onClick={this.onDelete}>Excluir</Button>}
                         <Button color="secondary" onClick={this.toggle}>Fechar</Button>
                     </ModalFooter>
                 </Modal>
