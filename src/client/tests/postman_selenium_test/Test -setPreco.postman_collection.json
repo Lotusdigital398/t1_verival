@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "fe43846c-7a2f-479f-b74b-c79fc9d05d7f",
+		"name": "Test /setPreco",
+		"description": "Test /setPreco",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/setPreco",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4b03aab3-baa0-4ad2-8ba5-8d664a444e57",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"Dados incompletos!\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n   \"recurso\": \"\",\r\n   \"tipo\": \"\",\r\n   \"preco\": 5 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/setPreco",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"setPreco"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/setPreco cadeira",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a52352e-d970-4ec7-b7e2-bb7b5ea1c0bc",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"true\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n   \"recurso\": \"mobilia\",\r\n   \"tipo\": \"cadeira\",\r\n   \"preco\": 10 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/setPreco",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"setPreco"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/setPreco sala m2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9d51bc0b-b751-4832-aee8-1694c3ac55f4",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"true\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n   \"recurso\": \"sala\",\r\n   \"tipo\": \"m2\",\r\n   \"preco\": 1000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/setPreco",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"setPreco"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "5cd01905-8c5a-4a2a-93ea-a01279ea875e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "8e0a8f90-63e8-4165-aeeb-a6cd0ca86535",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

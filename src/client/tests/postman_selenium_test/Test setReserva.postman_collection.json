@@ -1,0 +1,347 @@
+{
+	"info": {
+		"_postman_id": "34865317-c689-4a56-bbb4-22860d487c4e",
+		"name": "Test setReserva",
+		"description": "Test setReserva",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "setReserva matricula invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f779349f-6026-4cb4-b99d-409f044e6806",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"Matrícula inválida!\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\t\"dataI\": \"2020-06-09T23:32:26.771Z\",\r\n   \"dataF\": \"2020-06-11T23:32:26.771Z\",\r\n   \"recurso\": \"mobilia\",\r\n   \"tipo\": \"cadeira\",\r\n   \"matricula\": \"17104\",\r\n  \"quantidade\": \"1\",\r\n \"preco\": 5 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/setReserva",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"setReserva"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setReserva data invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58192130-04b3-48fc-87ba-c16a7bc16f72",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"Data inicial inválida!\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\t\"dataI\": \"2020-06-04T23:32:26.771Z\",\r\n   \"dataF\": \"2020-06-11T23:32:26.771Z\",\r\n   \"recurso\": \"mobilia\",\r\n   \"tipo\": \"cadeira\",\r\n   \"matricula\": \"17104173\",\r\n  \"quantidade\": \"1\",\r\n \"preco\": 5 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/setReserva",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"setReserva"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setReserva data 4 dias invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b5c0835-4fce-4f5b-a93c-00a3e08e2f80",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"Data inicial inválida!\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\t\"dataI\": \"2020-06-10T23:32:26.771Z\",\r\n   \"dataF\": \"2020-06-11T23:32:26.771Z\",\r\n   \"recurso\": \"mobilia\",\r\n   \"tipo\": \"cadeira\",\r\n   \"matricula\": \"17104173\",\r\n  \"quantidade\": \"1\",\r\n \"preco\": 5 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/setReserva",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"setReserva"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setReserva data diaI>diaF",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2b552ba4-90e5-43cb-ab06-3b1c3a391b7d",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"Data inicial inválida!\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\t\"dataI\": \"2020-06-10T23:32:26.771Z\",\r\n   \"dataF\": \"2020-06-05T23:32:26.771Z\",\r\n   \"recurso\": \"mobilia\",\r\n   \"tipo\": \"cadeira\",\r\n   \"matricula\": \"17104173\",\r\n  \"quantidade\": \"1\",\r\n \"preco\": 5 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/setReserva",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"setReserva"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setReserva true",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b29845c-0cc3-4860-8e84-9a96ceee4249",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"true\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\t\"dataI\": \"2020-06-12T23:32:26.771Z\",\r\n  \"dataF\": \"2020-06-16T23:32:26.771Z\",\r\n   \"recurso\": \"mobilia\",\r\n   \"tipo\": \"cadeira\",\r\n   \"matricula\": \"17104173\",\r\n  \"quantidade\": \"15\",\r\n \"preco\": 5 \r\n\t\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/setReserva",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"setReserva"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setReserva true",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "157a0777-eb23-42e0-9fc6-b1d67b39c76b",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"true\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\t\"dataI\": \"2020-06-19T23:32:26.771Z\",\r\n    \"dataF\": \"2020-06-19T23:32:26.771Z\",\r\n    \"recurso\": \"sala\",\r\n    \"tipo\": \"Sala 102\",\r\n    \"matricula\": \"17104173\",\r\n    \"quantidade\": \"10\",\r\n    \"preco\": 5 \r\n\t\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/setReserva",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"setReserva"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setReserva sala indisponivel",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9f6499dd-1a58-43d1-9210-0c89ddda7ef8",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"Sala indisponível na data selecionada!\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\t\"dataI\": \"2020-06-19T23:32:26.771Z\",\r\n    \"dataF\": \"2020-06-19T23:32:26.771Z\",\r\n    \"recurso\": \"sala\",\r\n    \"tipo\": \"Sala 102\",\r\n    \"matricula\": \"17104119\",\r\n    \"quantidade\": \"10\",\r\n    \"preco\": 5 \r\n\t\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/setReserva",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"setReserva"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setReserva true",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58372f32-7d0c-45e1-8744-e2700c69adfd",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"true\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\t\"dataI\": \"2020-06-20T23:32:26.771Z\",\r\n    \"dataF\": \"2020-06-20T23:32:26.771Z\",\r\n    \"recurso\": \"sala\",\r\n    \"tipo\": \"Sala 102\",\r\n    \"matricula\": \"17104119\",\r\n    \"quantidade\": \"10\",\r\n    \"preco\": 5 \r\n\t\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/setReserva",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"setReserva"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

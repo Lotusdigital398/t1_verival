@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "d61eca16-43ee-49e6-b578-7cb002c3b1fa",
+		"name": "Test getColaboradores",
+		"description": "Test /getRecursos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getColaboradores",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b541004-57d6-4fb1-9de0-1a2c2eb28f7d",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(```[\r",
+							"    {\r",
+							"        \"nome\": \"Max Franke\",\r",
+							"        \"matricula\": \"17104173\",\r",
+							"        \"email\": \"max.franke@acad.pucrs.br\",\r",
+							"        \"gastos\": 0\r",
+							"    },\r",
+							"    {\r",
+							"        \"nome\": \"Lucas Schell\",\r",
+							"        \"matricula\": \"17104156\",\r",
+							"        \"email\": \"lucas.schell@acad.pucrs.br\",\r",
+							"        \"gastos\": 88502\r",
+							"    },\r",
+							"    {\r",
+							"        \"nome\": \"Carlos de Santi\",\r",
+							"        \"matricula\": \"17104135\",\r",
+							"        \"email\": \"carlos.castro@acad.pucrs.br\",\r",
+							"        \"gastos\": 560\r",
+							"    },\r",
+							"    {\r",
+							"        \"nome\": \"Gabriel Castro\",\r",
+							"        \"matricula\": \"17104119\",\r",
+							"        \"email\": \"gabriel.castro@acad.pucrs.br\",\r",
+							"        \"gastos\": 8\r",
+							"    },\r",
+							"    {\r",
+							"        \"nome\": \"Frederico Thofehrn\",\r",
+							"        \"matricula\": \"09104169\",\r",
+							"        \"email\": \"frederico.thofehrn@acad.pucrs.br\",\r",
+							"        \"gastos\": 0\r",
+							"    }\r",
+							"]\r",
+							"```);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/getColaboradores",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"getColaboradores"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "17131f59-0578-4476-b96a-30fe5cc42271",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "fca3aa76-3412-47f5-8516-c1d5121eeeb6",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

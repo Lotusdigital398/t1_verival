@@ -191,11 +191,11 @@ class Admin extends Component {
                         <h3 align="center" style={{color: 'white'}}>Preço Atual</h3>
                         <h3 align="center" style={{color: 'green'}}>{this.formatMoney(this.state.precoAtual)}</h3>
                         <div>
-                            <FormControl className="recurso" variant="outlined">
+                            <FormControl className="recurso" variant="outlined" id="Recursos">
                                 <InputLabel id="demo-simple-select-outlined-label">Recurso</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-outlined-label"
-                                    id="demo-simple-select-outlined"
+                                    id="demo-simple-select-outlined1"
                                     label="Recurso"
                                     value={this.state.recurso}
                                     onChange={this.handleRec}
@@ -214,7 +214,7 @@ class Admin extends Component {
 
 
                         <div>
-                            <FormControl className="tipos" variant="outlined">
+                            <FormControl className="tipos" variant="outlined" id="Tipos">
                                 {this.state.recurso === "sala" ?
                                     <InputLabel id="demo-simple-select-outlined-label">Número</InputLabel>
                                     :
@@ -243,7 +243,6 @@ class Admin extends Component {
                         </div>
                         <form className="precos">
                             <TextField
-                                //^^^^^^^^^^^^^^^^^^MUDAR AQUI O CLASSNAME PRA QUANTIDADE CARLOS
                                 id="preco-Id"
                                 label="Preço"
                                 variant="outlined"

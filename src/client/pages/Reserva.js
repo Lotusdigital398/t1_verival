@@ -320,7 +320,7 @@ class Reserva extends Component {
                                 <InputLabel id="demo-simple-select-outlined-label">Recurso</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-outlined-label"
-                                    id="demo-simple-select-outlined"
+                                    id="demo-simple-select-outlined1"
                                     label="Recurso"
                                     value={this.state.recurso}
                                     onChange={this.handleRec}
@@ -340,14 +340,14 @@ class Reserva extends Component {
                         <div>
                             <FormControl className="tipo" variant="outlined">
                                 {this.state.recurso === "sala" ?
-                                    <InputLabel id="demo-simple-select-outlined-label">Número</InputLabel>
+                                    <InputLabel id="demo-simple-select-outlined-label3">Número</InputLabel>
                                     :
-                                    <InputLabel id="demo-simple-select-outlined-label">Tipo</InputLabel>
+                                    <InputLabel id="demo-simple-select-outlined-label5">Tipo</InputLabel>
                                 }
 
                                 <Select
                                     labelId="demo-simple-select-outlined-label"
-                                    id="demo-simple-select-outlined"
+                                    id="demo-simple-select-outlined4"
                                     label="Tipo"
                                     value={this.state.tipo}
                                     onChange={this.handleTipo}

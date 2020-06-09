@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "6f191f9e-4cf0-4dec-bf86-2114c088fefc",
+		"name": "Test /getQuantidade",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/getQuantidade cadeira",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "df99a836-1486-4b10-bb0d-cb0047f86354",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"200\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/getQuantidade?recurso=mobilia&tipo=cadeira&dataI=Tue, Jun 9, 2020 12:55 AM&dataF=Tue, Jun 23, 2020 12:55 AM",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"getQuantidade"
+					],
+					"query": [
+						{
+							"key": "recurso",
+							"value": "mobilia"
+						},
+						{
+							"key": "tipo",
+							"value": "cadeira"
+						},
+						{
+							"key": "dataI",
+							"value": "Tue, Jun 9, 2020 12:55 AM"
+						},
+						{
+							"key": "dataF",
+							"value": "Tue, Jun 23, 2020 12:55 AM"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getQuantidade notebook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e17de764-371f-449e-b20d-227b9c00a203",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"70\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/getQuantidade?recurso=equipamento&tipo=notebook&dataI=Tue, Jun 10, 2020 12:55 AM&dataF=Tue, Jun 10, 2020 12:55 AM",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"getQuantidade"
+					],
+					"query": [
+						{
+							"key": "recurso",
+							"value": "equipamento"
+						},
+						{
+							"key": "tipo",
+							"value": "notebook"
+						},
+						{
+							"key": "dataI",
+							"value": "Tue, Jun 10, 2020 12:55 AM"
+						},
+						{
+							"key": "dataF",
+							"value": "Tue, Jun 10, 2020 12:55 AM"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ae4a8733-f665-4902-b638-67c43c03de65",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6d11640e-92e9-4a7e-b57e-b2707514875b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
