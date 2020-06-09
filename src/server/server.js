@@ -235,20 +235,25 @@ app.get('/getTipos', function (req, res) {
 })
 
 app.post('/setReserva', function (req, res) {
-    if (req.body.recurso === '' || req.body.tipo === '' || req.body.matricula === '' || req.body.preco === '' ||
-        req.body.quantidade === '' || (req.body.quantidade === '0' && req.body.recurso !== 'sala')) {
-        res.send('Dados incompletos!')
+    console.log(req.body.dataI)
+    if (req.body.dataI === null || req.body.dataF === null) {
+        res.send('Data inválida!')
     } else {
-        let matriculaVal = false;
-        database.colaboradores.forEach((item) => {
-            if (item.matricula === req.body.matricula) {
-                matriculaVal = true
-            }
-        })
-        if (matriculaVal) {
-            res.send(isDisponivel(req))
+        if (req.body.recurso === '' || req.body.tipo === '' || req.body.matricula === '' || req.body.preco === '' ||
+            req.body.quantidade === '' || (req.body.quantidade === '0' && req.body.recurso !== 'sala')) {
+            res.send('Dados incompletos!')
         } else {
-            res.send('Matrícula inválida!')
+            let matriculaVal = false;
+            database.colaboradores.forEach((item) => {
+                if (item.matricula === req.body.matricula) {
+                    matriculaVal = true
+                }
+            })
+            if (matriculaVal) {
+                res.send(isDisponivel(req))
+            } else {
+                res.send('Matrícula inválida!')
+            }
         }
     }
 })
@@ -259,6 +264,22 @@ function isDisponivel(req) {
     const listDatas = [];
     const dataF = moment(req.body.dataF, 'YYYY-MM-DD').format('DD-MM-YYYY');
     const dataI = moment(req.body.dataI, 'YYYY-MM-DD').format('DD-MM-YYYY');
+    console.log(moment().add(4, 'days'))
+    console.log(moment(req.body.dataF, 'YYYY-MM-DD'))
+
+    if (moment().isAfter(moment(req.body.dataI, 'YYYY-MM-DD'), 'day')) {
+        return 'Data inicial inválida!'
+    }
+    if (recurso === 'mobilia') {
+        if (moment().add(4, 'days').isAfter(moment(req.body.dataF, 'YYYY-MM-DD'), 'day')) {
+            return 'Data final inválida!'
+        }
+    } else {
+        if (moment().isAfter(moment(req.body.dataF, 'YYYY-MM-DD'), 'day')) {
+            return 'Data final inválida!'
+        }
+    }
+
     let data = moment(req.body.dataI, 'YYYY-MM-DD');
     const db = database;
     //cria lista com todas as datas em que estara alugado
