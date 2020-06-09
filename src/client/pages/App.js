@@ -8,6 +8,7 @@ import Home from "./Home";
 import Reserva from "./Reserva";
 import CalendarComponent from "../component/CalendarComponent";
 import Colaboradores from "./Colaboradores";
+import Admin from "./Admin";
 import Error from "./Error";
 import Navigation from "./Navigation";
 
@@ -20,6 +21,7 @@ class App extends Component {
                     <Navigation/>
                     <Switch>
                         <Route path="/" component={Home} exact/>
+                        <Route path="/admin" component={Admin}/>
                         <Route path="/colaboradores" component={Colaboradores}/>
                         <Route path="/calendar" component={CalendarComponent}/>
                         <Route path="/reserva" component={Reserva}/>

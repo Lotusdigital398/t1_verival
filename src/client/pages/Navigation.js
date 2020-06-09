@@ -10,6 +10,10 @@ const Navigation = () => {
                 <h3>Home</h3>
             </NavLink>
 
+            <NavLink className="navList" to="/admin">
+                <h3>Administrador</h3>
+            </NavLink>
+
             <NavLink className="navList" to="/colaboradores">
                 <h3>Colaboradores</h3>
             </NavLink>
