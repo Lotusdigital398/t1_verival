@@ -242,7 +242,6 @@ app.get('/getTipos', function (req, res) {
 })
 
 app.post('/setReserva', function (req, res) {
-    console.log(req.body.dataI)
     if (req.body.dataI === null || req.body.dataF === null) {
         res.send('Data inválida!')
     } else {
@@ -271,10 +270,9 @@ function isDisponivel(req) {
     const listDatas = [];
     const dataF = moment(req.body.dataF, 'YYYY-MM-DD').format('DD-MM-YYYY');
     const dataI = moment(req.body.dataI, 'YYYY-MM-DD').format('DD-MM-YYYY');
-    console.log(moment().add(4, 'days'))
-    console.log(moment(req.body.dataF, 'YYYY-MM-DD'))
 
-    if (verData(dataI, dataF, recurso) !== '') {
+    if (verData(moment(req.body.dataI, 'YYYY-MM-DD'), moment(req.body.dataF, 'YYYY-MM-DD'), recurso) !== '') {
+        console.log('aaaaaaaaaaaa')
         return verData(dataI, dataF, recurso)
     }
 
@@ -343,6 +341,8 @@ function isDisponivel(req) {
 }
 
 function verData(dataI, dataF, recurso) {
+    console.log(moment())
+    console.log((moment(dataI, 'YYYY-MM-DD'), 'day'))
     if (moment().isAfter(moment(dataI, 'YYYY-MM-DD'), 'day')) {
         return 'Data inicial inválida!'
     }
