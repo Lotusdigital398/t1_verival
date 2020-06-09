@@ -42,15 +42,7 @@
     {
       "tipo": "Sala 103",
       "m2": "60",
-      "reservas": [
-        {
-          "matricula": "17104156",
-          "dataInicio": "08-06-2020",
-          "dataFim": "08-06-2020",
-          "preco": 1200,
-          "quantidade": "2"
-        }
-      ]
+      "reservas": []
     },
     {
       "tipo": "Sala 104",
@@ -60,15 +52,7 @@
     {
       "tipo": "Sala 105",
       "m2": "40",
-      "reservas": [
-        {
-          "matricula": "17104156",
-          "dataInicio": "08-06-2020",
-          "dataFim": "11-06-2020",
-          "preco": 80000,
-          "quantidade": "50"
-        }
-      ]
+      "reservas": []
     }
   ],
   "mobilia": [
@@ -76,43 +60,13 @@
       "tipo": "cadeira",
       "quantidade": "200",
       "preco": "5",
-      "reservas": [
-        {
-          "matricula": "17104156",
-          "dataInicio": "08-06-2020",
-          "dataFim": "12-06-2020",
-          "quantidade": "50",
-          "preco": 250
-        }
-      ]
+      "reservas": []
     },
     {
       "tipo": "mesa",
       "quantidade": "200",
       "preco": "5,5",
-      "reservas": [
-        {
-          "matricula": "17104156",
-          "dataInicio": "08-05-2020",
-          "dataFim": "12-06-2020",
-          "quantidade": "1",
-          "preco": 10
-        },
-        {
-          "matricula": "17104156",
-          "dataInicio": "08-06-2020",
-          "dataFim": "12-06-2020",
-          "quantidade": "1",
-          "preco": 10
-        },
-        {
-          "matricula": "17104156",
-          "dataInicio": "08-06-2020",
-          "dataFim": "12-06-2020",
-          "quantidade": "1",
-          "preco": 10
-        }
-      ]
+      "reservas": []
     }
   ],
   "equipamento": [
@@ -126,36 +80,7 @@
       "tipo": "mouse",
       "quantidade": "70",
       "preco": "2",
-      "reservas": [
-        {
-          "matricula": "17104156",
-          "dataInicio": "08-06-2020",
-          "dataFim": "08-06-2020",
-          "quantidade": "10",
-          "preco": 20
-        },
-        {
-          "matricula": "17104119",
-          "dataInicio": "08-06-2020",
-          "dataFim": "09-06-2020",
-          "quantidade": "2",
-          "preco": 8
-        },
-        {
-          "matricula": "17104156",
-          "dataInicio": "08-06-2020",
-          "dataFim": "08-06-2020",
-          "quantidade": "1",
-          "preco": 2
-        },
-        {
-          "matricula": "17104135",
-          "dataInicio": "15-06-2020",
-          "dataFim": "18-06-2020",
-          "quantidade": "70",
-          "preco": 560
-        }
-      ]
+      "reservas": []
     },
     {
       "tipo": "tablet",
@@ -167,15 +92,7 @@
       "tipo": "smartphone",
       "quantidade": "20",
       "preco": "9",
-      "reservas": [
-        {
-          "matricula": "17104156",
-          "dataInicio": "08-06-2020",
-          "dataFim": "21-06-2020",
-          "quantidade": "5",
-          "preco": 7000
-        }
-      ]
+      "reservas": []
     }
   ]
 }
