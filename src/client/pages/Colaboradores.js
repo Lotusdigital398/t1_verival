@@ -44,7 +44,7 @@ class Colaboradores extends Component {
     }
 
     formatMoney(number) {
-        return parseInt(number).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+        return parseFloat(number).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
     }
 
     render() {

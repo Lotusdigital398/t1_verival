@@ -30,7 +30,7 @@ class Reserva extends Component {
             recursos: [],
             tipos: [],
             modal: false,
-            regexp: /^[0-9\b]+$/
+            regexp: /^[0-9.\b]+$/
         }
 
         this.handlePrecoAtual = this.handlePrecoAtual.bind(this)
@@ -110,9 +110,11 @@ class Reserva extends Component {
                     tipo: '',
                     preco: '',
                     header: 'Sucesso!',
+                    precoAtual: '0',
                     message: 'Preço alterado com sucesso!'
                 })
                 this.toggle()
+                this.getGlobal()
             } else {
                 this.setState({
                     header: 'Erro!',
@@ -159,7 +161,7 @@ class Reserva extends Component {
     }
 
     formatMoney(number) {
-        return parseInt(number).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+        return parseFloat(number).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
     }
 
     toggle() {
@@ -201,7 +203,7 @@ class Reserva extends Component {
                                     {this.state.recursos.map((item) => {
                                         return (
                                             <MenuItem style={{textTransform: 'capitalize'}} key={item}
-                                                      value={item}>{item}</MenuItem>
+                                                      value={item}>{item === 'sala' ? 'espaço físico' : item}</MenuItem>
                                         )
                                     })}
 

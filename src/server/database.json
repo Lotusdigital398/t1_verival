@@ -26,21 +26,21 @@
       "email": "frederico.thofehrn@acad.pucrs.br"
     }
   ],
-  "m2": "1",
+  "m2": "1.5",
   "assento": "1",
   "sala": [
     {
-      "tipo": "101",
+      "tipo": "Auditório",
       "m2": "100",
       "reservas": []
     },
     {
-      "tipo": "102",
+      "tipo": "Sala 102",
       "m2": "80",
       "reservas": []
     },
     {
-      "tipo": "103",
+      "tipo": "Sala 103",
       "m2": "60",
       "reservas": [
         {
@@ -53,12 +53,12 @@
       ]
     },
     {
-      "tipo": "104",
+      "tipo": "Sala 104",
       "m2": "60",
       "reservas": []
     },
     {
-      "tipo": "105",
+      "tipo": "Sala 105",
       "m2": "40",
       "reservas": [
         {
@@ -89,7 +89,7 @@
     {
       "tipo": "mesa",
       "quantidade": "200",
-      "preco": "10",
+      "preco": "5,5",
       "reservas": [
         {
           "matricula": "17104156",
@@ -160,13 +160,13 @@
     {
       "tipo": "tablet",
       "quantidade": "20",
-      "preco": "8",
+      "preco": "4.5",
       "reservas": []
     },
     {
       "tipo": "smartphone",
       "quantidade": "20",
-      "preco": "10",
+      "preco": "9",
       "reservas": [
         {
           "matricula": "17104156",

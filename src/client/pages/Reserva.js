@@ -327,7 +327,7 @@ class Reserva extends Component {
                                     {this.state.recursos.map((item) => {
                                         return (
                                             <MenuItem style={{textTransform: 'capitalize'}} key={item}
-                                                      value={item}>{item}</MenuItem>
+                                                      value={item}>{item === 'sala' ? 'espaço físico' : item}</MenuItem>
                                         )
                                     })}
 
