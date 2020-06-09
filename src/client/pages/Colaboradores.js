@@ -73,7 +73,7 @@ class Colaboradores extends Component {
                             ))}
                         </TableBody>
                     </Table>
-                </TableContainer>,
+                </TableContainer>
 
                 <h2 align="center" style={{color: 'white'}}>Total de gastos:</h2>
 

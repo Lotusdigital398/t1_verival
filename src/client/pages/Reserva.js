@@ -164,7 +164,7 @@ class Reserva extends Component {
         }
         this.setState({diferencaTempo: dif});
         this.calculaPreco(this.state.tipo, undefined, dif)
-        this.getQuantidade(undefined, event, fim)
+        this.getQuantidade(undefined, event, new Date(fim))
     }
 
     handleDataF(event) {
@@ -208,6 +208,7 @@ class Reserva extends Component {
     }
 
     formatMoney(number) {
+        number = isNaN(number) ? 0 : number
         return number.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
     }
 
