@@ -1,0 +1,39 @@
+
+
+.salaC p{
+    position: relative;
+    left: 220px;
+}
+
+.salaCR p{
+    position: relative;
+    left: 200px;
+}
+
+.equipC p{
+    position: relative;
+    left: 120px;
+}
+
+.equipCR p{
+    position: relative;
+    left: 120px;
+}
+
+
+
+.mobC p{
+    position: relative;
+    left: 50px;
+    width: 20px;
+
+}
+
+.mobCR p{
+    position: relative;
+    left: 40px;
+    width: 20px;
+
+}
+
+

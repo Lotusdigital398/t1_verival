@@ -255,6 +255,7 @@ class Reserva extends Component {
 
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <Grid>
+                        <br/>
                         <h3 align="center" style={{color: 'white'}}>Preço da Reserva:</h3>
                         <h3 align="center" style={{color: 'green'}}>{this.formatMoney(this.state.precoTotal)}</h3>
                         <h3 align="center" style={{color: 'white'}}>Quantidade disponível:</h3>
